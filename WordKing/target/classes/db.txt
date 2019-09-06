@@ -1,0 +1,17 @@
+create table WK_USERS(
+    seq number primary key,
+    userid varchar2(1024) unique not null,
+    userpwd varchar2(1024) not null,
+    email varchar2(128) unique not null,
+    job_seq number not null REFERENCES wk_jobs(job_seq),
+    image varchar2(512),
+    favorite varchar2(256) not null,
+    birthdate date not null,
+    registerdate date default sysdate,
+    updatedate date default sysdate
+    );
+
+create table wk_jobs(
+    job_seq number primary key,
+    job_name varchar2(128) not null unique
+    );
