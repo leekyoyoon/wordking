@@ -2,6 +2,10 @@ $("#createAccount").click(function(){
 	$("#contents-body").load("resources/part/signUp.jsp");
 });
 
+$("#fileUpload").on("click", function () {
+	$("#contents-body").load("resources/part/fileForm.jsp");
+});
+
 $("#loginBtn").click(function(){
 	var userid = $("#userId").val();
 	var userpwd = $("#userPwd").val();
