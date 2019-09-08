@@ -20,9 +20,11 @@ public class UsersController {
 	@RequestMapping(value="/insertUsers",method=RequestMethod.POST)
 	@ResponseBody
 	public String insertUsers(Users user) {
+		System.out.println(user);
 		int result = 0;
 		try {
 			result = udao.insertUsers(user);
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

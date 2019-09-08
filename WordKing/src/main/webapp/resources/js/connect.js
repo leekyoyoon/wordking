@@ -38,22 +38,31 @@ $("#loginBtn").click(function(){
 });
 
 $("#createButton").click(function(){
-	var userid = $("#userId").val();
-	var userpwd = $("#userPwd").val();
-	var userName = $("#userName").val();
-	var email = $("#email").val();
-	var job_seq = $("#job_seq").val();
+	var Userid = $("#userId").val();
+	var Userpwd = $("#userPwd").val();
+	var UserName = $("#userName").val();
+	var Email = $("#email").val();
+	var Job_seq = $("#job_seq").val();
+	var BirthDate = $("#birthDate").val();
+	var Favorite = $("#favorite").val();
 	
-	
-	alert("클릭");
+	alert(Userid);
+	alert(Userpwd);
+	alert(UserName);
+	alert(Email);
+	alert(Job_seq);
+	alert(Favorite);
+	alert(BirthDate);
 	$.ajax({
-		url:"signUp",
+		url:"insertUsers",
 		data:{
-			userId : userid,
-			userPwd : userpwd,
-			userName : userName,
-			email : email,
-			job_seq : job_seq
+			userId : Userid,
+			userPwd : Userpwd,
+			userName : UserName,
+			email : Email,
+			job_seq : Job_seq,
+			favorite : Favorite,
+			birthDate : BirthDate
 		},
 		type: "POST",
 		success:function(Data){
