@@ -8293,11 +8293,11 @@ strong {
 
 .btn-outline-KAKAO {
   background-color: transparent;
-  border-color: #ffee5f;
+  border-color: #ddaa5f;
   color: #ffee5f; }
 .btn-outline-KAKAO:hover, .btn-outline-KAKAO:focus {
     background-color: #ffee5f;
-    border-color: #ffee5f;
+    border-color: #ddaa5f;
     color: #000; }
 
 .btn-outline-twitter {
@@ -41053,3 +41053,4 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
 
 .wd-280 {
   width: 280px; }
+

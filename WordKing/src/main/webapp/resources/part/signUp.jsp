@@ -2,27 +2,27 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>Home</title>
-	
-	<!-- Required meta tags -->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<!-- import CSS -->
-	<link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
-	<link rel="stylesheet" href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css">
+   <title>Home</title>
+   
+   <!-- Required meta tags -->
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+   <!-- import CSS -->
+   <link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
+   <link rel="stylesheet" href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="resources/lib/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="resources/lib/jqvmap/jqvmap.min.css">
-	<link rel="stylesheet" href="resources/css/dashforge.dashboard.css">
-  	<link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
-	
+   <link rel="stylesheet" href="resources/css/dashforge.dashboard.css">
+     <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
+   
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="resources/js/connect.js"></script>
 
 <script>
-	
+   
 </script>
 <body>
 
@@ -51,41 +51,53 @@
               </div>
               
              <div class="form-group">
-                <label>名前</label>
+                <div class="d-flex justify-content-between mg-b-5">
+                  <label class="mg-b-0-f">名前</label>
+                </div>
                 <input type="text" class="form-control" id="userName" placeholder="名前">
               </div>
               
               
               <div class="form-group">
-                <label>メールアドレス</label>
+                 <div class="d-flex justify-content-between mg-b-5">
+                  <label class="mg-b-0-f">メールアドレス</label>
+                </div>
                 <input type="email" class="form-control" id="email" placeholder="メールアドレス">
               </div>
               
               
               <div class="form-group">
-                <label>職業</label><br>
-				<input type="radio" name="job_seq" id="job_seq" value="1" >学生   &nbsp;
-				<input type="radio" name="job_seq" id="job_seq" value="2" >会社員   &nbsp;
-				<input type="radio" name="job_seq" id="job_seq" value="3" >主婦   &nbsp;
-				<input type="radio" name="job_seq" id="job_seq" value="4" >その以外に   &nbsp;
+                 <div class="d-flex justify-content-between mg-b-5">
+                  <label class="mg-b-0-f">職業</label>
+                </div>
+            <input type="radio" name="job_seq" id="job_seq" value="1" >学生   &nbsp;
+            <input type="radio" name="job_seq" id="job_seq" value="2" >会社員   &nbsp;
+            <input type="radio" name="job_seq" id="job_seq" value="3" >主婦   &nbsp;
+            <input type="radio" name="job_seq" id="job_seq" value="4" >その以外に   &nbsp;
               </div>
               
               <div class="form-group">
-              	<label>イメージ</label><br>
+                  <div class="d-flex justify-content-between mg-b-5">
+                  <label class="mg-b-0-f">イメージ</label>
+                </div>
               </div>
            
-				<div class="form-group">
-              	<label>興味がある言葉</label><br>
-              	<input type="checkbox" name="favorite" value="japanese" id="favorite">日本語   &nbsp;
-			    <input type="checkbox" name="favorite" value="english" id="favorite">英語   &nbsp;
-			    <input type="checkbox" name="favorite" value="french," id="favorite">フランス語   &nbsp;
-				<input type="checkbox" name="favorite" value="chinese" id="favorite">中国語   &nbsp;
-				<input type="checkbox" name="favorite" value="german" id="favorite">ドイツ語   &nbsp;
+            <div class="form-group">
+                  <div class="d-flex justify-content-between mg-b-5">
+                  <label class="mg-b-0-f">興味がある言語</label>
+                </div>
+                 <input type="checkbox" name="" value="japanese" >日本語   &nbsp;
+             <input type="checkbox" name="" value="english" >英語   &nbsp;
+             <input type="checkbox" name="" value="french," >フランス語   &nbsp;
+            <input type="checkbox" name="" value="chinese" >中国語   &nbsp;
+            <input type="checkbox" name="" value="german" >ドイツ語   &nbsp;
               </div>
               
               <div class="form-group">
-               <label>生年月日</label><br>
-				<input type="date" class="form-control" id="birthDate">
+               <div class="d-flex justify-content-between mg-b-5">
+                  <label class="mg-b-0-f">生年月日</label>
+                </div>
+            <input type="date" class="form-control" id="birthDate">
               </div>
               
               <div class="form-group tx-12">
