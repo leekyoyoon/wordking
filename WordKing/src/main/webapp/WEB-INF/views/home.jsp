@@ -111,7 +111,7 @@
 				</nav>
 			</div>
 
-			<div class="card-deck">
+			<div class="card-deck" style="padding-bottom: 20px;">
 				<div class="card">
 					<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">
 					<div class="card-body">
@@ -147,7 +147,7 @@
 					
 				</div>
 			</div>
-			<div class="card-deck">
+			<div class="card-deck" style="padding-bottom: 20px;">
 				<div class="card">
 					<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">
 					<div class="card-body">
