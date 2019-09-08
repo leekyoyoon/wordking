@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>Home!</title>
 	<!-- import CSS -->
 	<link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
 	<link href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
