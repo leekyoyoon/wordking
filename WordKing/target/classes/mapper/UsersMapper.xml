@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL -->
+<mapper namespace="www.wordking.com.Mapper.UsersMapper">
+
+	<insert id="insertUsers" parameterType="Users">
+	INSERT INTO WK_USERS
+	(
+		SEQ,
+		USERID,
+		USERPWD,
+		USERNAME,
+		EMAIL,
+		JOB_SEQ,
+		FAVORITE,
+		BIRTHDATE
+	)
+	VALUES(
+	(SELECT NVL(MAX(SEQ),0)+1 FROM WK_USERS),
+	#{userId},
+	#{userPwd},
+	#{userName},
+	#{email},
+	#{job_seq},
+	#{favorite},
+	#{birthDate}
+	)
+	</insert>
+	
+	<select id="validUserId" parameterType="String" resultType="int">
+		SELECT COUNT(USERID)
+		FROM WK_USERS
+		WHERE
+			USERID = #{userId}
+	</select>
+	
+	<select id="loginUserId" parameterType="Users" resultType="int">
+		SELECT COUNT(USERID)
+		FROM WK_USERS
+		WHERE
+			USERID = #{userId}
+		AND
+			USERPWD = #{userPwd}
+	</select>
+	
+	
+</mapper> 
