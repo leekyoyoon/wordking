@@ -48,11 +48,7 @@ $("#createButton").click(function(){
 	
 	alert(Userid);
 	alert(Userpwd);
-	alert(UserName);
-	alert(Email);
-	alert(Job_seq);
-	alert(Favorite);
-	alert(BirthDate);
+	
 	$.ajax({
 		url:"insertUsers",
 		data:{
