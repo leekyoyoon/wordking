@@ -80,7 +80,7 @@
       <!-- content-header -->
       <div class="content-body" id="contents-body">
 	
-		<div id="da-slider" class="da-slider" style="margin-top:0px;margin-bottom:2em; background-image: url('resources/img/waves.gif');">
+		<div id="da-slider" class="da-slider" style="margin-top:0px;margin-bottom:2em; background-image: url('resources/img/waves.gif');width: 100%;">
 				<div class="da-slide">
 					<h2>Easy management</h2>
 					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
@@ -111,6 +111,42 @@
 				</nav>
 			</div>
 
+			<div class="card-deck">
+				<div class="card">
+					<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">
+					<div class="card-body">
+						<h6 class="card-title">Card title</h6>
+						<p class="card-text">Some quick example text...</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="resources/img/2.png" width="100px" height="200px" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h6 class="card-title">Card title</h6>
+						<p class="card-text">Some quick example text...</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="resources/img/3.png" width="100px" height="200px"  class="card-img-top" alt="...">
+					<div class="card-body">
+						<h6 class="card-title">Card title</h6>
+						<p class="card-text">Some quick example text...</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
+					
+				</div>
+				<div class="card">
+					<img src="resources/img/3.png" width="100px" height="200px"  class="card-img-top" alt="...">
+					<div class="card-body">
+						<h6 class="card-title">Card title</h6>
+						<p class="card-text">Some quick example text...</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
+					
+				</div>
+			</div>
 			<div class="card-deck">
 				<div class="card">
 					<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">
