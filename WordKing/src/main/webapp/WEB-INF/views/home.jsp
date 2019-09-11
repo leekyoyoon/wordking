@@ -77,7 +77,7 @@
   
           <a href="" class="nav-link"><i data-feather="help-circle" style="width: 2em;height:2em;"></i></a>
           <a href="" class="nav-link"><i data-feather="grid" style="width: 2em;height:2em;"></i></a>
-          <a href="" class="nav-link"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
+          <a class="nav-link" id="myPage"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
         </nav>
       </div>
       <!-- content-header -->

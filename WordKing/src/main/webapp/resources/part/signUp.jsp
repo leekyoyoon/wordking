@@ -107,7 +107,7 @@
               <button class="btn btn-brand-02 btn-block" id="cButton">WordKing　IDを登録</button> 
              
               <div class="divider-text">or</div>
-              <button class="btn btn-outline-KAKAO btn-block" id="kButton">Sign Up With KAKAO</button>
+              <button class="btn btn-outline-KAKAO btn-block" >Sign Up With KAKAO</button>
               <div class="tx-13 mg-t-20 tx-center">Already have an account? <a href="page-signin.html">Sign In</a></div>
             </div>
           </div><!-- sign-wrapper -->

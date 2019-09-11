@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL -->
+<mapper namespace="www.wordking.com.Mapper.CsMapper">
+	
+	<!-- 공지사항 리스트 출력 -->
+	<select id="selectNoticeList" resultType="Notice">
+		SELECT
+			noticeNum
+			,noticeTitle
+			,noticeContents
+			,TO_CHAR(noticeDate,'YYYY-MM-DD') noticeDate
+			,adminId
+			,count
+		FROM 
+			WK_NOTICE
+	</select>
+	
+	<!-- 공지사항 상세 출력 -->
+	<select id="selectOneFaq" parameterType="int"   resultType="Faq">
+		SELECT
+			noticeNum
+			,noticeTitle
+			,noticeContents
+			,TO_CHAR(noticeDate,'YYYY-MM-DD') noticeDate
+			,adminId
+			,count
+		FROM 
+			WK_FAQ
+		WHERE
+			faqnum = #{faqnum}
+	</select>
+	
+	
+	
+	<!-- FAQ 자주묻는질문 리스트 출력 -->
+	<select id="selectFaqList" resultType="Faq">
+		SELECT
+			FAQNUM
+			,CATEGORY1
+			,CATEGORY2
+			,CATEGORY3
+			,FAQTITLE
+			,FAQCONTENT
+			,FAQID
+			,COUNT
+		FROM 
+			WK_FAQ
+	</select>
+	
+</mapper> 

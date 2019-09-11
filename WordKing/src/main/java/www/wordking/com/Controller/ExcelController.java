@@ -25,7 +25,7 @@ public class ExcelController {
 
 	@RequestMapping(value = "/downloadExcelFile", method = RequestMethod.POST)
 	public String downloadExcelFile(Model model) {
-		String[] names = {"ï¿½Ú¸ï¿½", "ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"};
+		String[] names = {"ÀÚ¸ù", "¾ÖÇÃ¸Á°í", "¸á·Ð", "¿À·»Áö"};
 		long[] prices = {5000, 10000, 7000, 6000};
 		int[] quantities = {50, 50, 40, 40};
 		List<Excel> list = service.makeFruitList(names, prices, quantities);
@@ -34,7 +34,7 @@ public class ExcelController {
 
 		model.addAttribute("locale", Locale.KOREA);
 		model.addAttribute("workbook", workbook);
-		model.addAttribute("workbookName", "ï¿½ï¿½ï¿½ï¿½Ç¥");
+		model.addAttribute("workbookName", "°úÀÏÇ¥");
 
 		return "excelDownloadView";
 	}

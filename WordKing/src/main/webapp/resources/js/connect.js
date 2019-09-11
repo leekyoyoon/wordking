@@ -19,11 +19,6 @@ $("#gotoContact").on('click',function(){
 	$("#contents-body").load("resources/part/CustomerService.jsp");
 });
 
-$("#kButton").on('click',function(){
-	alert("!!");
-	location.reload();
-});
-
 $("#loginBtn").click(function(){
 	var userid = $("#userId").val();
 	var userpwd = $("#userPwd").val();

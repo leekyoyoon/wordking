@@ -98,7 +98,7 @@ function role(){
 			</li>
           <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>学習</span></a></li>
           <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>他の単語帳 調べ</span></a></li>
-          <li class="nav-item"><a  class="nav-link"><i data-feather="file-text" id="fileWord"></i> <span>File Upload / Download</span></a></li>
+          <li class="nav-item"><a  class="nav-link" id="fileWord"><i data-feather="file-text" ></i> <span>File Upload / Download</span></a></li>
           <li class="nav-label mg-t-25" style="font-size: 2em;">試験</li>
           <li class="nav-item"><a href="app-calendar.html" class="nav-link"><i data-feather="calendar"></i> <span>受験</span></a></li>
           <li class="nav-item"><a href="app-chat.html" class="nav-link"><i data-feather="message-square"></i> <span>オススメの試験</span></a></li>
