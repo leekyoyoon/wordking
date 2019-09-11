@@ -49,9 +49,9 @@ public class UsersController {
 		return "true";
 	}
 	
-	@RequestMapping(value="/idCheck",method=RequestMethod.POST)
+	@RequestMapping(value="/validUserId",method=RequestMethod.POST)
 	@ResponseBody
-	public String idCheck(Users user) {
+	public String validUserId(Users user) {
 		System.out.println(user.getUserId());
 		int result = udao.validUserId(user.getUserId());
 		if (result ==1) {

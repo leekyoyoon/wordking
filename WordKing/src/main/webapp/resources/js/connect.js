@@ -80,17 +80,17 @@ $("#cButton").click(function(){
 	  $.ajax({
 	      url:"insertUsers",
 	      data:{
-	         userId : userid,
-	         userPwd : userpwd,
-	         userName : userName,
-	         email : email,
-	         job_seq : job_seq,
-	         favorite : favorite,
+	         userId : Userid,
+	         userPwd : Userpwd,
+	         userName : UserName,
+	         email : Email,
+	         job_seq : Job_seq,
+	         favorite : Favorite,
 	         birthDate : BirthDate
 	      },
 	      type: "post",
 	      success:function(Data){
-	         alert("!@#");
+	         location.reload();
 	      }
 	   })
 	
@@ -98,7 +98,7 @@ $("#cButton").click(function(){
 
 var idcheck = 0;
 	
-	$("#userIds").change(function(){
+$("#userIds").change(function(){
 	   var userid = $("#userIds").val();
 	   $.ajax({
 	      url:"validUserId",
