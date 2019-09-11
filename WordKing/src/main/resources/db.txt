@@ -16,3 +16,40 @@ create table wk_jobs(
     job_seq number primary key,
     job_name varchar2(128) not null unique
     );
+    
+    
+CREATE TABLE wk_faq (
+faqnum number,
+category1 varchar2(128) not null,
+category2 varchar2(128) not null,
+category3 varchar2(128),
+faqtitle varchar2(514) not null,
+faqcontent varchar2(1024)not null,
+faqid varchar2(128),
+count number default '0',
+primary key(faqnum)
+);
+
+create sequence wkfaq_seq;
+
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','공개범위설정','계정공개','계정 공개가 무엇인가요?','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보분실','아이디 찾기','아이디를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보분실','비밀번호 찾기','비밀번호를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장은 어떻게 만드나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
+
+CREATE TABLE wk_notice (
+noticenum number,
+noticetitle varchar2(512) not null,
+noticecontents varchar2(1024)not null,
+noticedate date default sysdate,
+adminid varchar2(50) not null,
+count number default '0',
+primary key(noticenum)
+);
+
+create sequence wknotice_seq;
+
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'9월 이벤트 안내','9월의 이벤트를 소개합니다.',sysdate,'admin1','10');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'8월 이벤트 안내','8월의 이벤트를 소개합니다.',sysdate,'admin1','110');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'7월 이벤트 안내','7월의 이벤트를 소개합니다.',sysdate,'admin1','89');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'6월 이벤트 안내','6월의 이벤트를 소개합니다.',sysdate,'admin1','152');

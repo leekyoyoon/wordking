@@ -107,7 +107,7 @@ function role(){
 
           <li class="nav-label mg-t-25" style="font-size: 2em;">マイページ</li>
           <li class="nav-item with-sub">
-            <a href="" class="nav-link"><i data-feather="file"></i> <span>Other Pages</span></a>
+            <a class="nav-link" id="gotoContact"><i data-feather="file"></i> <span>お客様センター</span></a>
             <ul>
               <li><a href="page-timeline.html">Timeline</a></li>
             </ul>

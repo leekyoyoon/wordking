@@ -14,9 +14,9 @@ $("#fileWord").click(function(){
 	$("#contents-body").load("resources/part/fileForm.jsp");
 });
 
+//contact a태그 누르면 이벤트 함수 호출
 $("#gotoContact").on('click',function(){
-	alert("!!");
-	   $("#contents-body").load("resources/part/CustomerService.jsp");
+	$("#contents-body").load("resources/part/CustomerService.jsp");
 });
 
 $("#kButton").on('click',function(){
