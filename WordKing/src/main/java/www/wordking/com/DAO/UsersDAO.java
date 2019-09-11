@@ -28,4 +28,5 @@ public class UsersDAO {
 		int result = mapper.loginUserId(user);
 		return result;
 	}
+
 }

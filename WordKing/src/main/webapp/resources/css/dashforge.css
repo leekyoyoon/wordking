@@ -13751,7 +13751,7 @@ textarea.parsley-success:focus {
   @media (min-width: 992px) {
     .content-header {
       height: 60px;
-      padding: 0 25px; } }
+      padding: 0px; } }
   @media (max-width: 575px) {
     .content-header .nav {
       flex-wrap: nowrap; } }
@@ -13796,15 +13796,15 @@ textarea.parsley-success:focus {
   padding: 15px;
   height: calc(100% - 54px);
   overflow-y: auto; }
-  @media (min-width: 576px) {
-    .content-body {
-      padding: 20px; } }
   @media (min-width: 992px) {
     .content-body {
+      padding: 20px; } }
+/*   @media (min-width: 992px) {
+    .content-body {
       padding: 25px;
-      height: calc(100% - 60px); } }
+      height: calc(100% - 60px); } } 
   .content-body .container {
-    margin-bottom: 25px; }
+    margin-bottom: 25px; }*/
     @media (max-width: 1199.98px) {
       .content-body .container {
         max-width: none; } }
@@ -41054,3 +41054,15 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
 .wd-280 {
   width: 280px; }
 
+@media(max-width: 1199px){
+	
+	.aside-body{
+		visibility: hidden; 
+	}
+	.aside-header{
+		visibility: hidden;
+	}
+	.content-body{
+		width: 100%;
+	}
+}

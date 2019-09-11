@@ -12,10 +12,18 @@
 	<title>Home</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/connect.js"></script>
 <script>
+
+function role(){
+	
+	
+	
+	
+	
+}
 
 </script>
 <body>
@@ -36,18 +44,18 @@
           <div class="d-flex align-items-center justify-content-start">
             <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></a>
             <div class="aside-alert-link">
-              <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
+            <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
               <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>
               <a href="" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+           
             </div>
           </div>
           
           <div class="aside-loggedin-user">
             <a href="#loggedinMsenu" class="d-flex align-items-center justify-content-between mg-b-2" data-toggle="collapse">
-            
+            </a>
               <h6 class="tx-semibold mg-b-0">${sessionScope.loginId}</h6>
               <i data-feather="chevron-down"></i>
-            </a>
             <p class="tx-color-03 tx-12 mg-b-0">Administrator</p>
           </div>
           <div class="collapse" id="loggedinMenu">
@@ -80,17 +88,17 @@
         <ul class="nav nav-aside">
           <li class="nav-label" style="font-size: 2em;">単語帳</li>
           <li class="nav-item">
-          <a class="nav-link with-sub" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">単語 ▼</a>
+          <a class="nav-link with-sub" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"  aria-controls="collapseExample"><i data-feather="globe"></i><span>単語 ▼</span></a>
 			<div class="collapse mg-t-5" id="collapseExample">
-			<a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>- 新たな単語帳 作成</span></a>
-			<a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>- 単語 登録</span></a>
-			<a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>- 単語帳 検索</span></a>
-			<a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>- 単語 分析</span></a>
+			<a  class="nav-link"><span>- 新たな単語帳 作成</span></a>
+			<a  class="nav-link"><span>- 単語 登録</span></a>
+			<a  class="nav-link"><span>- 単語帳 検索</span></a>
+			<a  class="nav-link"><span>- 単語 分析</span></a>
 			</div>
-          
+			</li>
           <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>学習</span></a></li>
           <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>他の単語帳 調べ</span></a></li>
-          <li class="nav-item"><a  class="nav-link"><i data-feather="life-buoy"></i> <span>File Upload / Download</span></a></li>
+          <li class="nav-item"><a  class="nav-link"><i data-feather="file-text" id="fileWord"></i> <span>File Upload / Download</span></a></li>
           <li class="nav-label mg-t-25" style="font-size: 2em;">試験</li>
           <li class="nav-item"><a href="app-calendar.html" class="nav-link"><i data-feather="calendar"></i> <span>受験</span></a></li>
           <li class="nav-item"><a href="app-chat.html" class="nav-link"><i data-feather="message-square"></i> <span>オススメの試験</span></a></li>
@@ -104,12 +112,19 @@
               <li><a href="page-timeline.html">Timeline</a></li>
             </ul>
           </li>
-          <li class="nav-label mg-t-25" style="font-size: 2em;">お客様センター</li>
-          <li class="nav-item"><a href="../../components" class="nav-link"><i data-feather="layers"></i> <span>Components</span></a></li>
-          <li class="nav-item"><a href="../../collections" class="nav-link"><i data-feather="box"></i> <span>Collections</span></a></li>
-        </ul>
+         </ul>
       </div>
     </aside>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="resources/lib/feather-icons/feather.min.js"></script>
+    <script src="resources/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+ 	<script src="resources/lib/jquery/jquery.min.js"></script>
+    <script src="resources/js/dashforge.js"></script>
+   
+    <!-- append theme customizer -->
+    <script src="resources/lib/js-cookie/js.cookie.js"></script>
+    
+    
 </body>
 <style>
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/

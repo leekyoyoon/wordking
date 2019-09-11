@@ -22,7 +22,7 @@
 <script src="resources/js/connect.js"></script>
 
 <script>
-   
+
 </script>
 <body>
 
@@ -40,14 +40,14 @@
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">ID</label>
                 </div>
-                <input type="text" class="form-control" id="userId" placeholder="ID">
+                <input type="text" class="form-control" id="userIds" placeholder="ID">
               </div> 
              
              <div class="form-group">
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">パスワード</label>
                 </div>
-                <input type="password" class="form-control" id="userPwd" placeholder="パスワード">
+                <input type="password" class="form-control" id="userPwds" placeholder="パスワード">
               </div>
               
              <div class="form-group">
@@ -86,11 +86,11 @@
                   <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">興味がある言語</label>
                 </div>
-                 <input type="checkbox" name="" value="japanese" >日本語   &nbsp;
-             <input type="checkbox" name="" value="english" >英語   &nbsp;
-             <input type="checkbox" name="" value="french," >フランス語   &nbsp;
-            <input type="checkbox" name="" value="chinese" >中国語   &nbsp;
-            <input type="checkbox" name="" value="german" >ドイツ語   &nbsp;
+                 <input type="checkbox" name="favorite" value="japanese" >日本語   &nbsp;
+             <input type="checkbox" name="favorite" value="english" >英語   &nbsp;
+             <input type="checkbox" name="favorite" value="french" >フランス語   &nbsp;
+            <input type="checkbox" name="favorite" value="chinese" >中国語   &nbsp;
+            <input type="checkbox" name="favorite" value="german" >ドイツ語   &nbsp;
               </div>
               
               <div class="form-group">
@@ -104,10 +104,10 @@
                 By clicking <strong>Create an account</strong> below, you agree to our terms of service and privacy statement.
               </div><!-- form-group -->
 
-              <button class="btn btn-brand-02 btn-block" id="createButton">WordKing　IDを登録</button> 
+              <button class="btn btn-brand-02 btn-block" id="cButton">WordKing　IDを登録</button> 
              
               <div class="divider-text">or</div>
-              <button class="btn btn-outline-KAKAO btn-block">Sign Up With KAKAO</button>
+              <button class="btn btn-outline-KAKAO btn-block" id="kButton">Sign Up With KAKAO</button>
               <div class="tx-13 mg-t-20 tx-center">Already have an account? <a href="page-signin.html">Sign In</a></div>
             </div>
           </div><!-- sign-wrapper -->
@@ -141,6 +141,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 <style>
 
