@@ -24,7 +24,6 @@
 <script src="resources/js/connect.js"></script>
 <script>
 
-
 	$(function(){
 			
 		$('#da-slider').cslider({
@@ -77,7 +76,7 @@
   
           <a href="" class="nav-link"><i data-feather="help-circle" style="width: 2em;height:2em;"></i></a>
           <a href="" class="nav-link"><i data-feather="grid" style="width: 2em;height:2em;"></i></a>
-          <a class="nav-link" id="myPage"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
+          <a href="goMypage" class="nav-link"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
         </nav>
       </div>
       <!-- content-header -->
@@ -118,7 +117,7 @@
 				<div class="card">
 					<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">
 					<div class="card-body">
-						<h6 class="card-title">Card title</h6>
+						<h6 class="card-title">Card adasdas</h6>
 						<p class="card-text">Some quick example text...</p>
 						<a href="#" class="btn btn-primary">Go somewhere</a>
 					</div>

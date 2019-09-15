@@ -28,5 +28,17 @@ public class UsersDAO {
 		int result = mapper.loginUserId(user);
 		return result;
 	}
-
+	public int withdraw(String id) {
+		UsersMapper mapper = session.getMapper(UsersMapper.class);
+		int result = mapper.withdraw(id);
+		return result;
+	}
+	public Users select(String id) {
+		UsersMapper mapper = session.getMapper(UsersMapper.class);
+		return mapper.select(id);
+	}
+	public int userUpdate(Users vo) {
+		UsersMapper mapper = session.getMapper(UsersMapper.class);
+		return mapper.userUpdate(vo);
+	}
 }

@@ -2,32 +2,56 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
-   <title>Home</title>
-   
-   <!-- Required meta tags -->
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   
-   <!-- import CSS -->
-   <link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
-   <link rel="stylesheet" href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="resources/lib/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="resources/lib/jqvmap/jqvmap.min.css">
-   <link rel="stylesheet" href="resources/css/dashforge.dashboard.css">
-     <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
-   
+	<title>Home!</title>
+	<!-- import CSS -->
+	<link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
+	<link href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="resources/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="resources/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="resources/css/dashforge.dashboard.css">
+  	<link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="resources/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/style2.css" />
+	<link href='http://fonts.googleapis.com/css?family=Economica:700,400italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="resources/js/connect.js"></script>
-
 <script>
 
+
+	$(function(){
+		$("#sidebarrr").load("resources/part/sidebar.jsp");
+	})
+	
 </script>
 <body>
+<aside class="aside aside-fixed" id="sidebarrr" style="position: fixed;">
+</aside>
+ <div class="content ht-100v pd-0">
 
 
-    <div class="content content-fixed content-auth" id="page_signup" style="margin-top: 0;">
+      <div class="content-header">
+        <div class="content-search">
+          <i data-feather="search"></i>
+          <input type="search" class="form-control" placeholder="Search...">
+        </div>
+        <nav class="nav">
+  
+          <a href="" class="nav-link"><i data-feather="help-circle" style="width: 2em;height:2em;"></i></a>
+          <a href="" class="nav-link"><i data-feather="grid" style="width: 2em;height:2em;"></i></a>
+          <a class="nav-link" id="myPage"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
+        </nav>
+      </div>
+      <!-- content-header -->
+      <div class="content-body" id="contents-body">
+	
+	<div class="content content-fixed content-auth" id="page_signup" style="margin-top: 0;">
       <div class="container">
         <div class="media align-items-stretch justify-content-center ht-100p">
           <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
@@ -107,17 +131,14 @@
               <button class="btn btn-brand-02 btn-block" id="cButton">WordKing　IDを登録</button> 
              
               <div class="divider-text">or</div>
-              <button class="btn btn-outline-KAKAO btn-block" >Sign Up With KAKAO</button>
-              <div class="tx-13 mg-t-20 tx-center">Already have an account? <a href="page-signin.html">Sign In</a></div>
+              <button class="btn btn-outline-KAKAO btn-block" style="margin-bottom: 10%;">Sign Up With KAKAO</button>
             </div>
           </div><!-- sign-wrapper -->
           <div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
             <div class="mx-lg-wd-500 mx-xl-wd-550">
               <img src="https://via.placeholder.com/1280x1225" class="img-fluid" alt="">
             </div>
-            <div class="pos-absolute b-0 r-0 tx-12">
-              Social media marketing vector is created by <a href="https://www.freepik.com/pikisuperstar" target="_blank">pikisuperstar (freepik.com)</a>
-            </div>
+            
           </div><!-- media-body -->
         </div><!-- media -->
       </div><!-- container -->
@@ -125,9 +146,7 @@
 
     <footer class="footer">
       <div>
-        <span>&copy; 2019 DashForge v1.0.0. </span>
-        <span>Created by <a href="http://themepixels.me">ThemePixels</a></span>
-      </div>
+       </div>
       <div>
         <nav class="nav">
           <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
@@ -136,14 +155,42 @@
         </nav>
       </div>
     </footer>
+	
+	
+	</div>
+</div>
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="resources/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="resources/lib/jquery/jquery.min.js"></script>
+  	<!-- append theme customizer -->
+    <script src="resources/lib/js-cookie/js.cookie.js"></script>
+    
+    <script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+    
 </body>
 <style>
 
+.aside-body{
+	border: 0 auto;
+}
+	.banner {position: relative; width: 340px; height: 210px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
+	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
+	.banner ul li {float: left; width: 340px; height: 210px; margin:0; padding:0;}
+
+body{
+overflow: hidden;
+}
+
+.da-slider{
+	border-left : 8px;
+	border-right : 8px;
+	border-radius : 10px;
+	box-shadow : 5px 5px 5px 5px gray;
+	/* border-color: black; */
+}
 </style>
 </html>

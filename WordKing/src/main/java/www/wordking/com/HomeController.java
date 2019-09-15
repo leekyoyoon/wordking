@@ -1,15 +1,9 @@
 package www.wordking.com;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,5 +26,92 @@ public class HomeController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/gosignUP",method=RequestMethod.GET)
+	public String gosignUP() {
+		return "WEB-INF/views/signUp";
+	}
+	
+	@RequestMapping(value="/goMypage",method=RequestMethod.GET)
+	public String goMypage(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/myPage";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
+	@RequestMapping(value="/goFileword",method=RequestMethod.GET)
+	public String goFileword(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/fileForm";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
+	@RequestMapping(value="/goInsertword",method=RequestMethod.GET)
+	public String goInsertword(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/insertWord";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
+	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
+	public String createAccount() {
+		return "resources/part/signIn";
+	}
+	
+	@RequestMapping(value="/goVocaList",method=RequestMethod.GET)
+	public String goVocaList(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/vocaList";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
+	@RequestMapping(value="/goInsertWord",method=RequestMethod.GET)
+	public String goInsertWord(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/insertWord";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
+	@RequestMapping(value="/goUpdate",method=RequestMethod.POST)
+	public String goUpdate(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/userUpdate";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
+	@RequestMapping(value="/goWithdraw",method=RequestMethod.POST)
+	public String goWithdraw(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/userWithdraw";
+		}else{
+			return "resources/part/signIn";
+		}
 	}
 }

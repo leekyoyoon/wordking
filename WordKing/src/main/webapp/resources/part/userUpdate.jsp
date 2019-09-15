@@ -22,25 +22,100 @@
 <script src="resources/js/connect.js"></script>
 
 <script>
+   $(function(){
+	  select();
+	   
+   });
    
+   function select(){
+	 	$.ajax({
+	 		url: "select",
+	 		type: "post",
+	 		success: function(vo) {
+	 			$('#userName').val(vo.userName);
+	 			$('#email').val(vo.email);
+	 			var job_seq = vo.job_seq;
+	 			$('input:radio[name=job_seq]:input[value=' + job_seq + ']').attr("checked", true);
+	 			$('#birthDate').val(vo.birthDate);
+	 		},
+	 		error: function() {
+	 			alert("실패");
+	 		}
+	 	});  
+   };
+   
+   $('#userUpdate').on('click', userUpdate);
+   
+   function userUpdate() {
+	   var userName = $('#userName').val();
+		var userPwds = $('#userPwds').val();
+		var email = $('#email').val();
+		var Job_seq = $(":input:radio[name=job_seq]:checked").val();
+		var BirthDate = $("#birthDate").val();
+	   
+	   formcheck();
+	   
+	   $.ajax({
+		  url: "userUpdate",
+		  type: "post",
+		  data:{
+		         userPwd : userPwds,
+		         userName : userName,
+		         email : email,
+		         job_seq : Job_seq,
+		         birthDate : BirthDate
+		      },
+		  success: function(){
+			alert("성공");  
+		    $("#contents-body").load("resources/part/myPage.jsp");
+		  },
+		  error: function(){
+			  alert("실패");  
+		  }
+	   });
+   }
+   
+   function formcheck() {
+	 
+	 if(userPwds.length == 0) {
+		 alert("패스워드를 입력하세요");
+		 return false;
+	 }
+	 
+	 if(userName.length == 0) {
+		 alert("이름을 입력하세요");
+		 return false;
+	 }
+	 
+	 if(email.length == 0) {
+		 alert("이멜을 입력하세요");
+		 return false;
+	 }
+	 
+	 if(userPwds.length < 3 || userPwds.length > 10) {
+		 alert("비밀번호는 3자리에서 10자리 까지만 가능합니다.");
+		 return false;
+	 }
+	 return true;
+   };
 </script>
 <body>
-<h1>개인정보 수정</h1>
+<h1>個人情報修正</h1>
 
     <div class="content content-fixed content-auth" id="page_signup" style="margin-top: 0;">
       <div class="container">
         <div class="media align-items-stretch justify-content-center ht-100p">
           <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
             <div class="pd-t-20 wd-100p">
-             
-             <h4 class="tx-color-01 mg-b-5">新規登録!</h4>
-              <p class="tx-color-03 tx-16 mg-b-40">WordKingへようこそ.</p>     
+           　			  
+             <h4 class="tx-color-01 mg-b-5">個人情報</h4>
+              <p class="tx-color-03 tx-16 mg-b-40">WordKing</p>     
              
                 <div class="form-group">
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">ID</label>
                 </div>
-                	result.userId
+                	${sessionScope.loginId}
               </div> 
              
              <div class="form-group">
@@ -54,8 +129,8 @@
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">名前</label>
                 </div>
-                <input type="text" class="form-control" id="userName" placeholder="名前">
-              </div>
+              	     <input type="text" class="form-control" id="userName">
+             </div>
               
               
               <div class="form-group">
@@ -101,13 +176,13 @@
               </div>
               
               <div class="form-group tx-12">
-                By clicking <strong>Create an account</strong> below, you agree to our terms of service and privacy statement.
+                By WordKing <strong>Create an account</strong> below, you agree to our terms of service and privacy statement.
               </div><!-- form-group -->
 
-              <button class="btn btn-brand-02 btn-block" id="cButton">WordKing　IDを登録</button> 
+              <button class="btn btn-brand-02 btn-block" id="userUpdate">個人情報修正完了</button> 
+              
+              
              
-              <div class="divider-text">or</div>
-              <button class="btn btn-outline-KAKAO btn-block" id="kButton">Sign Up With KAKAO</button>
               <div class="tx-13 mg-t-20 tx-center">Already have an account? <a href="page-signin.html">Sign In</a></div>
             </div>
           </div><!-- sign-wrapper -->
@@ -125,8 +200,6 @@
 
     <footer class="footer">
       <div>
-        <span>&copy; 2019 DashForge v1.0.0. </span>
-        <span>Created by <a href="http://themepixels.me">ThemePixels</a></span>
       </div>
       <div>
         <nav class="nav">

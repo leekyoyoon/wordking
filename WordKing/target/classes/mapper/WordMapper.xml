@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL -->
+<mapper namespace="www.wordking.com.Mapper.VocaMapper">
+	<insert id="insertVoca" parameterType="Word">
+		insert into wk_words(
+			word_seq,
+		    category,
+		    word,
+		    meaning,
+		    image,
+		    user_seq
+		)
+		values(
+			(SELECT NVL(MAX(word_seq),0)+1 FROM wk_words),
+			#{category},
+			#{word},
+			#{meaning},
+			#{image},
+			(select seq from WK_USERS where userId = #{userId})	
+		)
+	</insert>
+</mapper>

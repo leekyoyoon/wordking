@@ -14,17 +14,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/connect.js"></script>
 <script>
 
-function role(){
-	
-	
-	
-	
-	
-}
+$(function(){
+	$("#goVoca").click(function(){
+		var name = "${sessionScope.loginId}";
+		if (name=="") {
+			$("#contents-body").load("resources/part/signIn.jsp");
+		} else if (name!="") {
+			$("#contents-body").load("resources/voca/vocaList.jsp");
+		}
+	});
+})
 
+
+function goLogin(){
+	$("#contents-body").load("resources/part/signIn.jsp");
+} 
 </script>
 <body>
 
@@ -79,7 +87,7 @@ function role(){
 					</div>
 					<div class="form-group">
 					<button type="button" class="btn btn-Light" style="width: 47.5%;" id="loginBtn">ログイン</button>
-					<button type="button" class="btn btn-Light" id="createAccount" style="width: 47.5%;">新規取得</button>
+					<button type="button" class="btn btn-Light" onclick="location.href='createAccount'" style="width: 47.5%;">新規取得</button>
 					</div>
 				</c:if>
 			</div>
@@ -90,10 +98,10 @@ function role(){
           <li class="nav-item">
           <a class="nav-link with-sub" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"  aria-controls="collapseExample"><i data-feather="globe"></i><span>単語 ▼</span></a>
 			<div class="collapse mg-t-5" id="collapseExample">
-			<a  class="nav-link"><span>- 新たな単語帳 作成</span></a>
-			<a  class="nav-link"><span>- 単語 登録</span></a>
-			<a  class="nav-link"><span>- 単語帳 検索</span></a>
-			<a  class="nav-link"><span>- 単語 分析</span></a>
+			<a class="nav-link"><span>- 単語帳 作成</span></a>
+			<a class="nav-link" ><span>- 単語 編集</span></a>
+			<a class="nav-link" href="goVocaList"><span>- My 単語帳</span></a>
+			<a class="nav-link"><span>- 単語 分析</span></a>
 			</div>
 			</li>
           <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>学習</span></a></li>
@@ -115,7 +123,6 @@ function role(){
          </ul>
       </div>
     </aside>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="resources/lib/feather-icons/feather.min.js"></script>
     <script src="resources/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
  	<script src="resources/lib/jquery/jquery.min.js"></script>
