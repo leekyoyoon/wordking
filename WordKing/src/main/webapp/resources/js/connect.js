@@ -43,19 +43,17 @@ $("#cButton").click(function(){
 	var UserName = $("#userName").val();
 	var Email = $("#email").val();
 	var Job_seq = $(":input:radio[name=job_seq]:checked").val();
-	   
-	var Favorite = $(":checkbox:radio[name=favorite]:checked").val();
-	
-	 var Favorite = '';
-	    $('input:checkbox[name="favorite"]:checked').each(function() {
-
-	         if(this.checked){//checked 처리된 항목의 값
-
-	            Favorite +=this.value; 
-	            Favorite +=",";
-	         }
-
-	    });
+	var Favorite = '';
+	var lastIndex = ($('input:checkbox[name="favorite"]:checked').length)-1;
+	alert(lastIndex);
+	  $('input:checkbox[name="favorite"]:checked').each(function(index) {
+		  Favorite +=this.value;
+		  if (index != lastIndex) {
+			Favorite += ',';
+		}
+	         })
+	alert(Favorite);
+	         
 	var BirthDate = $("#birthDate").val();
 	if (idcheck!=1) {
 		alert("아이디 중복체크를 해주세요!!");
@@ -74,7 +72,7 @@ $("#cButton").click(function(){
 	      },
 	      type: "post",
 	      success:function(Data){
-	         location.reload();
+	         alert('회원가입 성공!!');
 	      }
 	   })
 	

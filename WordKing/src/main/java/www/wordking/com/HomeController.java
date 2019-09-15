@@ -68,7 +68,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccount() {
-		return "resources/part/signIn";
+		return "WEB-INF/views/signUp";
 	}
 	
 	@RequestMapping(value="/goVocaList",method=RequestMethod.GET)
