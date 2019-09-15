@@ -46,5 +46,34 @@
 			USERPWD = #{userPwd}
 	</select>
 	
+	<delete id="withdraw" parameterType="String">
+		DELETE FROM
+			WK_USERS
+		WHERE
+			USERID = #{userId}
+			
+	</delete>
+	
+		<select id="select" parameterType="String" resultType="Users">
+		SELECT 
+		*
+		FROM WK_USERS
+		
+		WHERE
+		 USERID = #{id}
+	</select>
+	
+	<update id="userUpdate" parameterType="Users">
+		UPDATE
+			wk_users
+		SET
+			USERPWD = #{userPwd},
+		    USERNAME = #{userName},
+		    EMAIL = #{email},
+		    JOB_SEQ = #{job_seq},
+		    BIRTHDATE = #{birthDate}
+		WHERE
+			USERID = #{userId}
+	</update>
 	
 </mapper> 
