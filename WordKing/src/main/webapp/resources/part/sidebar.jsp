@@ -98,7 +98,7 @@ function goLogin(){
           <li class="nav-item">
           <a class="nav-link with-sub" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"  aria-controls="collapseExample"><i data-feather="globe"></i><span>単語 ▼</span></a>
 			<div class="collapse mg-t-5" id="collapseExample">
-			<a class="nav-link"><span>- 単語帳 作成</span></a>
+			<a class="nav-link" href="insertVoca"><span>- 単語帳 作成</span></a>
 			<a class="nav-link" ><span>- 単語 編集</span></a>
 			<a class="nav-link" href="goVocaList"><span>- My 単語帳</span></a>
 			<a class="nav-link"><span>- 単語 分析</span></a>

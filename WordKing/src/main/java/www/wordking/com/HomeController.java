@@ -114,4 +114,10 @@ public class HomeController {
 			return "resources/part/signIn";
 		}
 	}
+	
+	@RequestMapping(value="/insertVoca",method=RequestMethod.GET)
+	public String insertVoca() {
+		
+		return "WEB-INF/views/insertVoca";
+	}
 }

@@ -8,10 +8,12 @@
 		<typeAlias type="www.wordking.com.VO.Notice" alias="Notice" />
 		<typeAlias type="www.wordking.com.VO.Faq" alias="Faq" />	
 		<typeAlias type="www.wordking.com.VO.Word" alias="Word" />	
+		<typeAlias type="www.wordking.com.VO.Voca" alias="Voca" />	
 		</typeAliases>
 	<mappers>
 		<mapper resource="mapper/UsersMapper.xml" />
 		<mapper resource="mapper/CsMapper.xml" />
 		<mapper resource="mapper/WordMapper.xml" />
+		<mapper resource="mapper/VocaMapper.xml" />
 	</mappers> 
 </configuration>

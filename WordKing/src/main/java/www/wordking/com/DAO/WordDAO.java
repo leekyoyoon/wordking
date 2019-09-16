@@ -12,10 +12,10 @@ public class WordDAO {
 	@Autowired
 	SqlSession session;
 
-	public int insertVoca(Word word) {
+	public int insertWord(Word word) {
 		WordMapper mapper = session.getMapper(WordMapper.class);
 		
-		int result = mapper.insertVoca(word);
+		int result = mapper.insertWord(word);
 		
 		return result;
 	}

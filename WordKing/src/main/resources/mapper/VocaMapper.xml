@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL -->
+<mapper namespace="www.wordking.com.Mapper.VocaMapper">
+	<insert id="insertVoca" parameterType="Voca">
+
+	INSERT INTO WK_VOCABULARIES
+	(
+		SEQ,
+		WORD_SEQ,
+		USER_SEQ,
+		CATEGORY_SEQ,
+		TITLE
+		<if test="contents != null and contents != ''">
+		,CONTENTS
+		</if>
+		<if test="visible != null and visible != '' and visible != 0">
+		,VISIBLE
+		</if>
+	) VALUES(
+		#{seq},
+		#{word_seq},
+		#{user_seq},
+		#{category_seq},
+		#{title}
+		<if test="contents != null and contents != ''">
+		,#{contents}
+		</if>
+		<if test="visible != null and visible != '' and visible != 0">
+		,#{visible}
+		</if>
+	)
+	</insert>
+</mapper>

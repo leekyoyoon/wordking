@@ -4,6 +4,6 @@ import www.wordking.com.VO.Word;
 
 public interface WordMapper {
 
-	int insertVoca(Word word);
+	int insertWord(Word word);
 
 }

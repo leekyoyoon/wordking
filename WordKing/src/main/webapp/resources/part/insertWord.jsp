@@ -44,7 +44,7 @@ $("#vocaButton").click(function(){
 	
 	
 	$.ajax({
-		url:"insertVoca",
+		url:"insertWord",
 		data:{
 			Word : Word,
 			Meaning : Meaning,
@@ -54,7 +54,7 @@ $("#vocaButton").click(function(){
 		success:function(result){
 			if(result == 1){
 				alert("単語 登録 成功");
-				$("#contents-body").load("resources/voca/insertVoca.jsp");
+				$("#contents-body").load("resources/voca/insertWord.jsp");
 			}
 			if(result == 0){
 				alert("単語 登録 失敗");

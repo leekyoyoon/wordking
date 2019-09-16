@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 게시판 처리 SQL -->
-<mapper namespace="www.wordking.com.Mapper.VocaMapper">
-	<insert id="insertVoca" parameterType="Word">
+<mapper namespace="www.wordking.com.Mapper.WordMapper">
+	<insert id="insertWord" parameterType="Word">
 		insert into wk_words(
 			word_seq,
 		    category,

@@ -14,16 +14,16 @@ import www.wordking.com.VO.Word;
 @Controller
 public class WordController {
 	@Autowired
-	WordDAO dao;
+	WordDAO wdao;
 
-	@RequestMapping(value="/insertVoca",method=RequestMethod.POST)
+	@RequestMapping(value="/insertWord",method=RequestMethod.POST)
 	@ResponseBody
-	public int insertVoca(Word word,HttpSession session) {
+	public int insertWord(Word word,HttpSession session) {
 		word.setUserId((String)session.getAttribute("loginId"));
 		
 		System.out.println(word);
 		
-		int result = dao.insertVoca(word);
+		int result = wdao.insertWord(word);
 		
 		return result;
 	}
