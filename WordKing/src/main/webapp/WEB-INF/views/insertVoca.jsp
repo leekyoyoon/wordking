@@ -25,6 +25,33 @@
 <script>
 
 	$(function(){
+		
+		$.ajax({
+			url:'testtset',
+			type:'POST',
+			success:function(Data){
+				$("#inputTest").html(Data);
+			}
+		});
+		
+		$("#crawlingWord").click(function(){
+			var Word = $("#titleName").val();
+			var Category = $("#categoryValue").val();
+			var Checking = $("#checking").val();
+			$.ajax({
+				url:'crawlingWord',
+				data:{
+					word : Word,
+					category : Category,
+					checking : Checking
+				},
+				contentType: "application/x-www-form-urlencoded; charset=utf-8",  
+				type:'POST',
+				success:function(Data){
+					alert(Data);
+				}
+			})
+		});
 		$("#sidebarrr").load("resources/part/sidebar.jsp");
 		$('.select2').select2();
 		$('#plusinput').click(function(){
@@ -92,23 +119,23 @@
 		<div class="row">
 	<div class="col-sm-4" style="margin-bottom: 1%;">
 	<label for="formGroupExampleInput" class="d-block">タイトル</label>
-      <input type="text" class="form-control" placeholder="Invalid state" required >
+      <input type="text" class="form-control" id="titleName" placeholder="Invalid state" required >
       <div class="invalid-feedback">This is required</div>
     </div>
     <div class="col-sm-2" style="margin-bottom: 1%;">
     <label for="formGroupExampleInput" class="d-block">カテゴリー</label>
-    <select class="select2" style="width: 100%;" size="4" >
-    	<option value="1" selected="selected">韓国語</option>
-    	<option value="2">日本語</option>	
-    	<option value="3">ドイツ語</option>
-    	<option value="3">英語</option>
-    	<option value="3">中国語</option>    	
+    <select class="select2" id="categoryValue" style="width: 100%;" size="4" >
+    	<option value="kr" selected="selected">韓国語</option>
+    	<option value="jp">日本語</option>	
+    	<option value="fr">프랑스어</option>
+    	<option value="eng">英語</option>
+    	<option value="cn">中国語</option>    	
     </select>
    		
     </div>
     <div class="col-sm-2" style="margin-bottom: 1%;">
     <label for="formGroupExampleInput" class="d-block">visible</label>
-    <select class="select2" style="width: 100%;" >
+    <select class="select2" style="width: 100%;" id="checking">
     	<option value="1" selected="selected">全部公開</option>
     	<option value="2">フレンドだけ公開</option>	
     	<option value="3">非公開</option>
@@ -147,13 +174,14 @@
      <div class="col-sm-4" style="padding-top: 85px;">
      <label for="formGroupExampleInput" class="d-block">  </label>
      
-     <button type="button" class="btn btn-primary" style="width: 100%;height:85%;font-size: 3em;">登録</button>
+     <button type="button" class="btn btn-primary" id="crawlingWord" style="width: 100%;height:85%;font-size: 3em;">登録</button>
      </div>
     </div>
     </form>
     <hr>
-    <h1>133121212323</h1>
+    <div id="inputTest">
     
+    </div>
     <div id="inputDiv">
     <button id="plusinput">추가</button>
     <input type="text" placeholder="1번째">
