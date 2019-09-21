@@ -68,7 +68,7 @@ insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 1
     
 create table wk_words(
     word_seq number primary key,
-    category number REFERENCES wk_favorite(seq),
+    category number REFERENCES wk_favorites(favorite_seq),
     word varchar2(256) not null,
     meaning varchar2(2000) not null,
     image varchar2(256),
