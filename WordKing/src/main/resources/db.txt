@@ -21,14 +21,13 @@ create table wk_jobs(
     job_name varchar2(128) not null unique
     );
 
-insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'学生');
-insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'会社員');
-insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'主婦');
-insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'その以外に');
+insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'耶��뵟');
+insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'鴉싩ㅎ�뱻');
+insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'訝삣ĳ');
+insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'�걹�겗餓ε쨼�겓');
 
 create table wk_vocabularies(
     seq number primary key,
-    word_seq number REFERENCES wk_words(word_seq) not null,
     user_seq number REFERENCES wk_users(seq) not null,
     category_seq number REFERENCES wk_favorites(favorite_seq) not null,
     title varchar2(128) not null,
@@ -36,6 +35,35 @@ create table wk_vocabularies(
     registerdate date default sysdate,
     updatedate date default sysdate
 );
+insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, 'test1', 1, sysdate, sysdate);
+insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, 'Jpt', 1, sysdate, sysdate);
+insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, 'JLPT', 1, sysdate, sysdate);
+insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, '600점 목표 JPT', 1, sysdate, sysdate);
+insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, 'N2', 1, sysdate, sysdate);
+commit;
+
+create table wk_vocalist(
+    seq number primary key,
+    voca_seq number REFERENCES wk_vocabularies(seq) not null,
+    word_seq number REFERENCES wk_words(word_seq) not null,
+    registerdate date default sysdate,
+    updatedate date default sysdate
+);
+select category,word, meaning,image, (select userid from wk_users where userid = 'qwe') userId
+from wk_vocalist
+where (select seq from wk_vocabularies where seq = 1) =  (select voca_seq from wk_vocalist where voca_seq = 1);
+
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 1, 1, sysdate, sysdate);
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 1, 2, sysdate, sysdate);
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 1, 3, sysdate, sysdate);
+
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 2, 4, sysdate, sysdate);
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 2, 5, sysdate, sysdate);
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 2, 6, sysdate, sysdate);
+
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 8, sysdate, sysdate);
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 9, sysdate, sysdate);
+insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 10, sysdate, sysdate);
 
     
 create table wk_words(
@@ -49,13 +77,13 @@ create table wk_words(
     updatedate date default sysdate
     ); 
     
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '一', '하나', null, 1, sysdate, sysdate);    
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '二', '둘', null, 1, sysdate, sysdate);    
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '成長', '성장', null, 1, sysdate, sysdate);    
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '電子回路', '전자회로', null, 1, sysdate, sysdate);    
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '専攻', '전공', null, 1, sysdate, sysdate);
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '달', '月', null, 1, sysdate, sysdate);    
-insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '白', '흰', null, 1, sysdate, sysdate);  
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '訝�', '�븯�굹', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '雅�', '�몮', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '�닇�빓', '�꽦�옣', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '�쎔耶먨썮瓮�', '�쟾�옄�쉶濡�', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '弱귝뵽', '�쟾怨�', null, 1, sysdate, sysdate);
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '�떖', '�쐢', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '�쇋', '�씛', null, 1, sysdate, sysdate);  
 
 commit;
     
@@ -63,11 +91,11 @@ create table wk_favorites(
     favorite_seq number primary key,
     favorite_name varchar2(128) unique not null);
         
-insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'日本語');
-insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'英語');
-insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'フランス語');
-insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'中国語');
-insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'ドイツ語');
+insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'�뿥�쑍沃�');
+insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'�떛沃�');
+insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'�깢�꺀�꺍�궧沃�');
+insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'訝��쎖沃�');
+insert into wk_favorites values((select nvl(max(favorite_seq),0)+1 from wk_favorites),'�깋�궎�깂沃�');
 
         
 CREATE TABLE wk_faq (
@@ -109,33 +137,33 @@ primary key(inquirynum)
 
 create sequence wkinquiry_seq;
 
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 9월 이벤트 안내','9월의 이벤트를 소개합니다.',sysdate,'admin1','10');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 8월 이벤트 안내','8월의 이벤트를 소개합니다.',sysdate,'admin1','110');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 7월 이벤트 안내','7월의 이벤트를 소개합니다.',sysdate,'admin1','89');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 6월 이벤트 안내','6월의 이벤트를 소개합니다.',sysdate,'admin1','152');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'어린이날 특별 이벤트 안내','5월5일은 어린이날! 학생 회원님들을 위한 특별한 소식!',sysdate,'admin1','152');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 5월 이벤트 안내','5월의 이벤트를 소개합니다.',sysdate,'admin1','152');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 4월 이벤트 안내','4월의 이벤트를 소개합니다.',sysdate,'admin1','152');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 4월 서비스 점검 안내','서비스 정기 점검이 진행됩니다.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 9�썡 �씠踰ㅽ듃 �븞�궡','9�썡�쓽 �씠踰ㅽ듃瑜� �냼媛쒗빀�땲�떎.',sysdate,'admin1','10');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 8�썡 �씠踰ㅽ듃 �븞�궡','8�썡�쓽 �씠踰ㅽ듃瑜� �냼媛쒗빀�땲�떎.',sysdate,'admin1','110');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 7�썡 �씠踰ㅽ듃 �븞�궡','7�썡�쓽 �씠踰ㅽ듃瑜� �냼媛쒗빀�땲�떎.',sysdate,'admin1','89');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 6�썡 �씠踰ㅽ듃 �븞�궡','6�썡�쓽 �씠踰ㅽ듃瑜� �냼媛쒗빀�땲�떎.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'�뼱由곗씠�궇 �듅蹂� �씠踰ㅽ듃 �븞�궡','5�썡5�씪�� �뼱由곗씠�궇! �븰�깮 �쉶�썝�떂�뱾�쓣 �쐞�븳 �듅蹂꾪븳 �냼�떇!',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 5�썡 �씠踰ㅽ듃 �븞�궡','5�썡�쓽 �씠踰ㅽ듃瑜� �냼媛쒗빀�땲�떎.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 4�썡 �씠踰ㅽ듃 �븞�궡','4�썡�쓽 �씠踰ㅽ듃瑜� �냼媛쒗빀�땲�떎.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019�뀈 4�썡 �꽌鍮꾩뒪 �젏寃� �븞�궡','�꽌鍮꾩뒪 �젙湲� �젏寃��씠 吏꾪뻾�맗�땲�떎.',sysdate,'admin1','152');
 
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','아이디공개','계정공개','계정 공개가 무엇인가요?','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','아이디 찾기','아이디를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','비밀번호 찾기','비밀번호를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','아이디 변경','아이디를 변경하고 싶습니다.','아이디는 변경이 불가능합니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','비밀번호 변경','비밀번호를 변경하고 싶습니다.','마이페이지에서 변경이 가능합니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','회원탈퇴','회원탈퇴하기','서비스를 탈퇴하고 싶습니다.','마이페이지에서 탈퇴가 가능합니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�쉶�썝','�븘�씠�뵒怨듦컻','怨꾩젙怨듦컻','怨꾩젙 怨듦컻媛� 臾댁뾿�씤媛��슂?','�옄�떊�쓽 怨꾩젙�씠 �떎瑜� �쉶�썝�씠 寃��깋 怨꾩젙 寃곌낵�뿉 �끂異쒕릺�뒗吏��쓽 �뿬遺�瑜� 寃곗젙�븯�뒗 寃껋엯�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�쉶�썝','怨꾩젙�젙蹂�','�븘�씠�뵒 李얘린','�븘�씠�뵒瑜� 遺꾩떎�뻽�뒿�땲�떎.','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�쉶�썝','怨꾩젙�젙蹂�','鍮꾨�踰덊샇 李얘린','鍮꾨�踰덊샇瑜� 遺꾩떎�뻽�뒿�땲�떎.','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�쉶�썝','怨꾩젙�젙蹂�','�븘�씠�뵒 蹂�寃�','�븘�씠�뵒瑜� 蹂�寃쏀븯怨� �떢�뒿�땲�떎.','�븘�씠�뵒�뒗 蹂�寃쎌씠 遺덇��뒫�빀�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�쉶�썝','怨꾩젙�젙蹂�','鍮꾨�踰덊샇 蹂�寃�','鍮꾨�踰덊샇瑜� 蹂�寃쏀븯怨� �떢�뒿�땲�떎.','留덉씠�럹�씠吏��뿉�꽌 蹂�寃쎌씠 媛��뒫�빀�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�쉶�썝','�쉶�썝�깉�눜','�쉶�썝�깉�눜�븯湲�','�꽌鍮꾩뒪瑜� �깉�눜�븯怨� �떢�뒿�땲�떎.','留덉씠�럹�씠吏��뿉�꽌 �깉�눜媛� 媛��뒫�빀�땲�떎.','admin','0');
 
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장은 어떻게 만드나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 삭제','단어장 삭제','단어장은 어떻게 삭제하나요?','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장은 몇 개까지 만들 수 있나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 합치기','단어장 합치기','단어장 2개를 합치고 싶어요.','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장에는 단어를 몇 개까지 넣을 수 있나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 수정하기','단어장 수정하기','단어장을 수정하고 싶어요.','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떒�뼱�옣','�떒�뼱�옣 留뚮뱾湲�','�떒�뼱�옣 留뚮뱾湲�','�떒�뼱�옣�� �뼱�뼸寃� 留뚮뱶�굹�슂?','�븘�옒�쓽 洹몃┝怨� �닚�꽌瑜� �솗�씤�빐二쇱꽭�슂.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떒�뼱�옣','�떒�뼱�옣 �궘�젣','�떒�뼱�옣 �궘�젣','�떒�뼱�옣�� �뼱�뼸寃� �궘�젣�븯�굹�슂?','�옄�떊�쓽 怨꾩젙�씠 �떎瑜� �쉶�썝�씠 寃��깋 怨꾩젙 寃곌낵�뿉 �끂異쒕릺�뒗吏��쓽 �뿬遺�瑜� 寃곗젙�븯�뒗 寃껋엯�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떒�뼱�옣','�떒�뼱�옣 留뚮뱾湲�','�떒�뼱�옣 留뚮뱾湲�','�떒�뼱�옣�� 紐� 媛쒓퉴吏� 留뚮뱾 �닔 �엳�굹�슂?','�븘�옒�쓽 洹몃┝怨� �닚�꽌瑜� �솗�씤�빐二쇱꽭�슂.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떒�뼱�옣','�떒�뼱�옣 �빀移섍린','�떒�뼱�옣 �빀移섍린','�떒�뼱�옣 2媛쒕�� �빀移섍퀬 �떢�뼱�슂.','�옄�떊�쓽 怨꾩젙�씠 �떎瑜� �쉶�썝�씠 寃��깋 怨꾩젙 寃곌낵�뿉 �끂異쒕릺�뒗吏��쓽 �뿬遺�瑜� 寃곗젙�븯�뒗 寃껋엯�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떒�뼱�옣','�떒�뼱�옣 留뚮뱾湲�','�떒�뼱�옣 留뚮뱾湲�','�떒�뼱�옣�뿉�뒗 �떒�뼱瑜� 紐� 媛쒓퉴吏� �꽔�쓣 �닔 �엳�굹�슂?','�븘�옒�쓽 洹몃┝怨� �닚�꽌瑜� �솗�씤�빐二쇱꽭�슂.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떒�뼱�옣','�떒�뼱�옣 �닔�젙�븯湲�','�떒�뼱�옣 �닔�젙�븯湲�','�떒�뼱�옣�쓣 �닔�젙�븯怨� �떢�뼱�슂.','�옄�떊�쓽 怨꾩젙�씠 �떎瑜� �쉶�썝�씠 寃��깋 怨꾩젙 寃곌낵�뿉 �끂異쒕릺�뒗吏��쓽 �뿬遺�瑜� 寃곗젙�븯�뒗 寃껋엯�땲�떎.','admin','0');
 
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험보기','시험보기','시험을 보고싶어요.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험보기','시험보기','시험보기가 무엇인가요?','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','성적 확인','성적 확인','성적을 확인하고 싶습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','성적 확인','성적 확인','많이 틀리는 문제를 알고싶어요','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험보기','시험보기','시험지를 파일로 다운로드받고 싶어요','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험준비','시험준비','시험 준비는 어떻게 하나요?','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떆�뿕','�떆�뿕蹂닿린','�떆�뿕蹂닿린','�떆�뿕�쓣 蹂닿퀬�떢�뼱�슂.','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떆�뿕','�떆�뿕蹂닿린','�떆�뿕蹂닿린','�떆�뿕蹂닿린媛� 臾댁뾿�씤媛��슂?','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떆�뿕','�꽦�쟻 �솗�씤','�꽦�쟻 �솗�씤','�꽦�쟻�쓣 �솗�씤�븯怨� �떢�뒿�땲�떎.','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떆�뿕','�꽦�쟻 �솗�씤','�꽦�쟻 �솗�씤','留롮씠 ��由щ뒗 臾몄젣瑜� �븣怨좎떢�뼱�슂','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떆�뿕','�떆�뿕蹂닿린','�떆�뿕蹂닿린','�떆�뿕吏�瑜� �뙆�씪濡� �떎�슫濡쒕뱶諛쏄퀬 �떢�뼱�슂','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'�떆�뿕','�떆�뿕以�鍮�','�떆�뿕以�鍮�','�떆�뿕 以�鍮꾨뒗 �뼱�뼸寃� �븯�굹�슂?','�씠硫붿씪 �씤利앹쓣 �넻�빐 �솗�씤�븷 �닔 �엳�뒿�땲�떎.','admin','0');
 
