@@ -72,9 +72,6 @@
 		    EMAIL = #{email},
 		    JOB_SEQ = #{job_seq},
 		    BIRTHDATE = #{birthDate}
-		    <if test="favorite !=null and favorite != ''">
-		    ,FAVORITE = #{FAVORITE}
-		    </if>
 		WHERE
 			USERID = #{userId}
 	</update>

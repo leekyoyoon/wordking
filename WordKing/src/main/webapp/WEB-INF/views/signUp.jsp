@@ -17,6 +17,11 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!--구글 로그인 스크립-->
+	<meta name="google-signin-client_id" content="534809019111-a70btomg9sjnt7a6d49e6lpreqjmdo3n.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	
 </head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -24,6 +29,69 @@
 <script src="resources/js/connect.js"></script>
 <script>
 
+
+function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  /* var UserIds = profile.getEmail().split('@') */
+	  console.log(profile.getId());
+	  	$('#userIds').val(profile.getEmail().split('@')[0]);
+	  	$('#userName').val(profile.getName());
+		$('#email').val(profile.getEmail());
+		$('#checkGoogle').html('');
+		$('#checkGoogle').html('<input id="buttonCSS" type="button" value="Google ConnectOut" onclick = "SignOut()">');
+	}
+
+function SignOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+      	location.reload();
+    });
+  }
+  
+/* function checking(data){
+	if(data =='google 연동하기'){
+		gauth.signIn().then(function(){
+			checkLoginStatus();
+		});
+	}
+	else{
+		gauth.signOut().then(function(){
+			checkLoginStatus();
+		});
+	}
+} */
+  
+/* 	function init() {
+		console.log('init');
+		gapi.load('auth2', function() {
+			window.gauth = gapi.auth2.init({
+				client_id:'534809019111-a70btomg9sjnt7a6d49e6lpreqjmdo3n.apps.googleusercontent.com'
+			})
+	
+			gauth.then(function(){
+				checkLoginStatus();
+			}, function(){
+			})
+		});
+		
+	}*/
+
+	/* function checkLoginStatus(){
+		var loginGBtn = document.querySelector("#loginGBtn");
+		if(gauth.isSignedIn.get()){
+			loginGBtn.value = '연동 끊기';
+			var profile = gauth.currentUser.get().getBasicProfile();
+			$('#userName').val(profile.getName());
+			$('#email').val(profile.getEmail());
+			
+		} else{
+			loginGBtn.value = 'google 연동하기';
+			$('#userName').val('');
+			$('#email').val('');
+			SignOut();
+		} 
+	} */
 
 	$(function(){
 		$("#sidebarrr").load("resources/part/sidebar.jsp");
@@ -56,8 +124,9 @@
         <div class="media align-items-stretch justify-content-center ht-100p">
           <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
             <div class="pd-t-20 wd-100p">
+            
              
-             <h4 class="tx-color-01 mg-b-5">新規登録!</h4>
+             <h4 class="tx-color-01 mg-b-5">新規登録</h4>
               <p class="tx-color-03 tx-16 mg-b-40">WordKingへようこそ.</p>     
              
                 <div class="form-group">
@@ -125,13 +194,16 @@
               </div>
               
               <div class="form-group tx-12">
-                By clicking <strong>Create an account</strong> below, you agree to our terms of service and privacy statement.
+                123 By clicking <strong>Create an account</strong> below, you agree to our terms of service and privacy statement.
               </div><!-- form-group -->
 
-              <button class="btn btn-brand-02 btn-block" id="cButton">WordKing　IDを登録</button> 
+              <button class="btn btn-brand-02 btn-block" id="cButton" >WordKing　IDを登録</button> 
              
               <div class="divider-text">or</div>
-              <button class="btn btn-outline-KAKAO btn-block" style="margin-bottom: 10%;">Sign Up With KAKAO</button>
+              <div id="checkGoogle">
+              	<div class="g-signin2" data-onsuccess="onSignIn" id="loginGBtn" style="height: 37.8; width: 528.14; " ></div>
+			  </div>
+				
             </div>
           </div><!-- sign-wrapper -->
           <div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
@@ -170,6 +242,9 @@
     
     <script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
 	<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+
+<!--구글 로그인-->
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     
 </body>
 <style>
@@ -191,6 +266,18 @@ overflow: hidden;
 	border-radius : 10px;
 	box-shadow : 5px 5px 5px 5px gray;
 	/* border-color: black; */
+}
+#buttonCSS{
+	height: 37.8; 
+	width: 528.14; 
+	color: #444444;
+    background: white;
+    border: 1px #DADADA solid;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 11pt;
+    outline: none;
 }
 </style>
 </html>

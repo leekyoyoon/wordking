@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import www.wordking.com.DAO.VocaDAO;
 import www.wordking.com.VO.Voca;
 
+
 @Controller
 public class VocaController {
 

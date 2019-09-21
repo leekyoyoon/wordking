@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import www.wordking.com.Mapper.VocaMapper;
 import www.wordking.com.VO.Voca;
 
+
 @Repository
 public class VocaDAO {
 

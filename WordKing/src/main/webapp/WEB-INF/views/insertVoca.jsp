@@ -25,33 +25,6 @@
 <script>
 
 	$(function(){
-		
-		$.ajax({
-			url:'testtset',
-			type:'POST',
-			success:function(Data){
-				$("#inputTest").html(Data);
-			}
-		});
-		
-		$("#crawlingWord").click(function(){
-			var Word = $("#titleName").val();
-			var Category = $("#categoryValue").val();
-			var Checking = $("#checking").val();
-			$.ajax({
-				url:'crawlingWord',
-				data:{
-					word : Word,
-					category : Category,
-					checking : Checking
-				},
-				contentType: "application/x-www-form-urlencoded; charset=utf-8",  
-				type:'POST',
-				success:function(Data){
-					alert(Data);
-				}
-			})
-		});
 		$("#sidebarrr").load("resources/part/sidebar.jsp");
 		$('.select2').select2();
 		$('#plusinput').click(function(){
@@ -119,23 +92,23 @@
 		<div class="row">
 	<div class="col-sm-4" style="margin-bottom: 1%;">
 	<label for="formGroupExampleInput" class="d-block">タイトル</label>
-      <input type="text" class="form-control" id="titleName" placeholder="Invalid state" required >
+      <input type="text" class="form-control" placeholder="Invalid state" required >
       <div class="invalid-feedback">This is required</div>
     </div>
     <div class="col-sm-2" style="margin-bottom: 1%;">
     <label for="formGroupExampleInput" class="d-block">カテゴリー</label>
-    <select class="select2" id="categoryValue" style="width: 100%;" size="4" >
-    	<option value="kr" selected="selected">韓国語</option>
-    	<option value="jp">日本語</option>	
-    	<option value="fr">프랑스어</option>
-    	<option value="eng">英語</option>
-    	<option value="cn">中国語</option>    	
+    <select class="select2" style="width: 100%;" size="4" >
+    	<option value="1" selected="selected">韓国語</option>
+    	<option value="2">日本語</option>	
+    	<option value="3">ドイツ語</option>
+    	<option value="3">英語</option>
+    	<option value="3">中国語</option>    	
     </select>
    		
     </div>
     <div class="col-sm-2" style="margin-bottom: 1%;">
     <label for="formGroupExampleInput" class="d-block">visible</label>
-    <select class="select2" style="width: 100%;" id="checking">
+    <select class="select2" style="width: 100%;" >
     	<option value="1" selected="selected">全部公開</option>
     	<option value="2">フレンドだけ公開</option>	
     	<option value="3">非公開</option>
@@ -174,19 +147,52 @@
      <div class="col-sm-4" style="padding-top: 85px;">
      <label for="formGroupExampleInput" class="d-block">  </label>
      
-     <button type="button" class="btn btn-primary" id="crawlingWord" style="width: 100%;height:85%;font-size: 3em;">登録</button>
+     <button type="button" class="btn btn-primary" style="width: 100%;height:85%;font-size: 3em;">登録</button>
      </div>
     </div>
     </form>
     <hr>
-    <div id="inputTest">
+    <h1>単語追加</h1>
+    
+    <div id="inputDiv">
+    <div class="TermContent-inner"> 
+    	<div><span><input type="button" value="削除"></span></div>
+    	<div class="TermContent-inner-padding">
+    	<div class="TermContent-side">
+    		<div class="TermContent-side--word">
+    			<label class="UITextarea"	>
+				<span><input type="text" placeholder="単語"></span>
+				<span class="UITextarea-border"></span>   		
+				<span class="UITextarea-label">単語</span>
+				</label>
+    		</div>
+    		<div class="TermContent-side--word">
+    			<label class="UITextarea">
+				<span><input type="text" placeholder="意味"></span>
+				<span class="UITextarea-border"></span>   		
+				<span class="UITextarea-label">意味</span>
+				</label>
+    		</div>単語王
+    	</div>
+    	</div>
+    </div>
+    <div  class="TermContent-inner">
+    	<div>
+    	<a class="TermContent-addRow" id="plusinput">
+    		<span class="TermContent-addRowButton">
+    			<button class="" type="button">
+    				<span >+ カード追加</span>
+    			</button>
+    		</span>
+    		</a>
+    	</div>
+    </div>
     
     </div>
-    <div id="inputDiv">
-    <button id="plusinput">추가</button>
-    <input type="text" placeholder="1번째">
-    </div>
 	</div>
+	
+    <!-- <button id="plusinput">追加</button>
+    <input type="text" placeholder="1번째"> -->
 </div>
 
 
@@ -203,6 +209,7 @@
 	<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
     
 </body>
+
 <style>
 
 .aside-body{
@@ -338,6 +345,102 @@ border: 3px solid #fff;
 .remove-image:active {
   border: 0;
   transition: all .2s ease;
+}
+
+.TermContent-side{
+	cursor: text;
+    display: table-cell;
+    padding-top: .75rem;
+    position: relative;
+    vertical-align: top;
+    word-break: break-word;
+    z-index: 1;
+}
+
+.TermContent-inner{
+	background-color: #fff;
+    position: relative;
+}
+.TermContent-side--word{
+	padding-left: .75rem;
+    padding-right: 1.25rem;
+    width: 50%;
+}
+.UITextarea-border {
+    -webkit-align-self: flex-end;
+    align-self: flex-end;
+    -ms-flex-item-align: end;
+    display: block;
+    height: .25rem;
+    box-shadow: 0 0.125rem 0 0 #455358;
+    transition: all .12s cubic-bezier(.47,0,.745,.715);
+    width: 100%;
+}
+.UITextarea-label {
+    color: #97a5aa;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    margin-top: .625rem;
+    text-align: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: .75rem;
+    letter-spacing: .0625rem;
+    line-height: 1.333333333333333;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.UITextarea {
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.444444444444444;
+}
+.TermContent-inner-padding {
+    padding: .75rem .75rem 1.5rem 4.625rem;
+}
+.TermContent-addRowButton {
+    white-space: nowrap;
+}
+.UILinkButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: .3125rem solid #3ccfcf;
+    color: #455358;
+    cursor: pointer;
+    display: inline-block;
+    font: inherit;
+    max-width: 100%;
+    padding: 0 0 .75rem;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: .9375rem;
+    letter-spacing: .075rem;
+    line-height: 1.2;
+    transition: all .12s cubic-bezier(.47,0,.745,.715);
+    vertical-align: middle;
+    width: auto;
+}
+.TermContent-addRow {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
 }
 </style>
 </html>

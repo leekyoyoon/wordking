@@ -15,4 +15,6 @@ public class Word {
 	private int user_seq;		//user_seq number REFERENCES wk_users(seq) not null
 	private Date registerdate;	//registerdate date default sysdate
 	private Date updatedate;	//updatedate date default sysdate
+	
+	private String title;		//voca ¿ë
 }

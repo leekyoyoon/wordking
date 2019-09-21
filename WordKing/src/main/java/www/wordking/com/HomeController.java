@@ -115,6 +115,17 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping(value="/takeExam",method=RequestMethod.GET)
+	public String takeExam(HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		if(loginId != null) {
+			return "resources/part/takeExam";
+		}else{
+			return "resources/part/signIn";
+		}
+	}
+	
 	@RequestMapping(value="/insertVoca",method=RequestMethod.GET)
 	public String insertVoca() {
 		

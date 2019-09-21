@@ -74,8 +74,6 @@ public class UsersController {
 	public Users select(HttpSession session) {
 		String id = (String)session.getAttribute("loginId");
 		Users vo = udao.select(id);
-		System.out.println(vo.getFavorite());
-		
 		return vo;
 	}
 	

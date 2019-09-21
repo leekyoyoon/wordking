@@ -42,7 +42,7 @@
               <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
 
               <div class="form-group">
-                <label>Email address</label>
+                <label>ID</label>
                 <input type="text" class="form-control" placeholder="your ID">
               </div>
               <div class="form-group">
@@ -52,11 +52,11 @@
                 </div>
                 <input type="password" class="form-control" placeholder="Enter your password">
               </div>
-              <button class="btn btn-brand-02 btn-block">Sign In</button>
-              <div class="divider-text">or</div>
+              <button class="btn btn-brand-02 btn-block">ログイン</button>
+              <!-- <div class="divider-text">or</div>
               <button class="btn btn-outline-facebook btn-block">Sign In With Facebook</button>
-              <button class="btn btn-outline-twitter btn-block">Sign In With Twitter</button>
-              <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a>Create an Account</a></div>
+              <button class="btn btn-outline-twitter btn-block">Sign In With Twitter</button> -->
+              <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="gosignUP">新規取得</a></div>
             </div>
           </div><!-- sign-wrapper -->
         </div><!-- media -->

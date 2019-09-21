@@ -36,6 +36,7 @@ create table wk_vocabularies(
     registerdate date default sysdate,
     updatedate date default sysdate
 );
+
     
 create table wk_words(
     word_seq number primary key,
@@ -47,6 +48,16 @@ create table wk_words(
     registerdate date default sysdate,
     updatedate date default sysdate
     ); 
+    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '一', '하나', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '二', '둘', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '成長', '성장', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '電子回路', '전자회로', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '専攻', '전공', null, 1, sysdate, sysdate);
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '달', '月', null, 1, sysdate, sysdate);    
+insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '白', '흰', null, 1, sysdate, sysdate);  
+
+commit;
     
 create table wk_favorites(
     favorite_seq number primary key,
@@ -73,11 +84,6 @@ primary key(faqnum)
 
 create sequence wkfaq_seq;
 
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','공개범위설정','계정공개','계정 공개가 무엇인가요?','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보분실','아이디 찾기','아이디를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보분실','비밀번호 찾기','비밀번호를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
-INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장은 어떻게 만드나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
-
 CREATE TABLE wk_notice (
 noticenum number,
 noticetitle varchar2(512) not null,
@@ -90,7 +96,46 @@ primary key(noticenum)
 
 create sequence wknotice_seq;
 
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'9월 이벤트 안내','9월의 이벤트를 소개합니다.',sysdate,'admin1','10');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'8월 이벤트 안내','8월의 이벤트를 소개합니다.',sysdate,'admin1','110');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'7월 이벤트 안내','7월의 이벤트를 소개합니다.',sysdate,'admin1','89');
-INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'6월 이벤트 안내','6월의 이벤트를 소개합니다.',sysdate,'admin1','152');
+CREATE TABLE wk_inquiry (
+inquirynum number,
+inquirycategory varchar2(512) not null,
+inquirytitle varchar2(1024)not null,
+inquirycontent varchar2(1024)not null,
+inquiryuserid varchar2(50) not null,
+inquirydate date default sysdate,
+inquiryupload varchar2(512), 
+primary key(inquirynum)
+);
+
+create sequence wkinquiry_seq;
+
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 9월 이벤트 안내','9월의 이벤트를 소개합니다.',sysdate,'admin1','10');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 8월 이벤트 안내','8월의 이벤트를 소개합니다.',sysdate,'admin1','110');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 7월 이벤트 안내','7월의 이벤트를 소개합니다.',sysdate,'admin1','89');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 6월 이벤트 안내','6월의 이벤트를 소개합니다.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'어린이날 특별 이벤트 안내','5월5일은 어린이날! 학생 회원님들을 위한 특별한 소식!',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 5월 이벤트 안내','5월의 이벤트를 소개합니다.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 4월 이벤트 안내','4월의 이벤트를 소개합니다.',sysdate,'admin1','152');
+INSERT INTO wk_notice VALUES (wknotice_seq.nextval,'2019년 4월 서비스 점검 안내','서비스 정기 점검이 진행됩니다.',sysdate,'admin1','152');
+
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','아이디공개','계정공개','계정 공개가 무엇인가요?','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','아이디 찾기','아이디를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','비밀번호 찾기','비밀번호를 분실했습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','아이디 변경','아이디를 변경하고 싶습니다.','아이디는 변경이 불가능합니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','계정정보','비밀번호 변경','비밀번호를 변경하고 싶습니다.','마이페이지에서 변경이 가능합니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'회원','회원탈퇴','회원탈퇴하기','서비스를 탈퇴하고 싶습니다.','마이페이지에서 탈퇴가 가능합니다.','admin','0');
+
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장은 어떻게 만드나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 삭제','단어장 삭제','단어장은 어떻게 삭제하나요?','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장은 몇 개까지 만들 수 있나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 합치기','단어장 합치기','단어장 2개를 합치고 싶어요.','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 만들기','단어장 만들기','단어장에는 단어를 몇 개까지 넣을 수 있나요?','아래의 그림과 순서를 확인해주세요.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'단어장','단어장 수정하기','단어장 수정하기','단어장을 수정하고 싶어요.','자신의 계정이 다른 회원이 검색 계정 결과에 노출되는지의 여부를 결정하는 것입니다.','admin','0');
+
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험보기','시험보기','시험을 보고싶어요.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험보기','시험보기','시험보기가 무엇인가요?','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','성적 확인','성적 확인','성적을 확인하고 싶습니다.','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','성적 확인','성적 확인','많이 틀리는 문제를 알고싶어요','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험보기','시험보기','시험지를 파일로 다운로드받고 싶어요','이메일 인증을 통해 확인할 수 있습니다.','admin1','0');
+INSERT INTO wk_faq VALUES (wkfaq_seq.nextval,'시험','시험준비','시험준비','시험 준비는 어떻게 하나요?','이메일 인증을 통해 확인할 수 있습니다.','admin','0');
+

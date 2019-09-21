@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>Home!</title>
+	<title>TakeTest</title>
 	<!-- import CSS -->
 	<link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
 	<link href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -21,69 +21,49 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="resources/js/voca.js"></script>
+<script src="resources/js/connect.js"></script>
 <script>
-$("#vocaButton").click(function(){
-	var Word = $("#word").val();
-	var Meaning = $("#meaning").val();
-	var Image = $("#image").val();
-	
-	if (Image.length == 0) {
-		Image = '';
-	}
-	   
-	if(Word.length == 0){
-		alert("単語を入力してください。");
-		return false;
-	}
-	
-	if(Meaning.length == 0){
-		alert("意味を入力してください。");
-		return false;
-	}
-	
-	
+$(function(){
 	$.ajax({
-		url:"insertWord",
-		data:{
-			Word : Word,
-			Meaning : Meaning,
-			Image : Image,
-		},
-		type: "post",
+		url:"searchVoca",
+		type:"post",
+		data:{},
 		success:function(result){
-			if(result == 1){
-				alert("単語 登録 成功");
-				$("#contents-body").load("resources/voca/insertVoca.jsp");
-			}
-			if(result == 0){
-				alert("単語 登録 失敗");
-			}
+			var str = '';
+
+			for(var i = 0; i < result.length; i++){
+				str += '<div class="card">';
+				str += '<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">';
+				str += '<div class="card-body">';
+				str += '<h6 class="card-title">'+ result[i].title +'</h6>';
+				str += '<p class="card-text">작성자 : '+ result[i].userid +'</p>';
+				str += '<a href="testDetail?seq='+ result[i].seq +'" class="btn btn-primary">詳しく</a>';
+				str += '</div>';
+				str += '</div>';
+				}
+
+			$('#test').append(str);
+			
 		}
-	})
-	
-});
+	});
+})
 
 </script>
-<h1>単語 登録</h1>
-
+<h1>受験!</h1>
 <body>
+	<div id="test" class="card-deck" style="padding-bottom: 20px;">
+
+	</div>
+
+
+
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="resources/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="resources/lib/jquery/jquery.min.js"></script>
   	<!-- append theme customizer -->
     <script src="resources/lib/js-cookie/js.cookie.js"></script>
-    <br>
-    <div class="voca-insertdata">
-		<input type="text" name="word" id="word" placeholder="単語"><br><br>
-		
-		<input type="text" name="meaning" id="meaning" placeholder="意味"><br><br>
-		
-		<input type="file" name="image" id="image" value="イメージ"><br><br>
-
-		<input type="button" id="vocaButton" value="単語 登録">
-    </div>
     
     <script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
 	<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
