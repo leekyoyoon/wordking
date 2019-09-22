@@ -2,6 +2,35 @@ drop table WK_USERS;
 drop table WK_jobs;
 commit;
 
+create table wk_vocabularies(
+    seq number primary key,
+    user_seq number REFERENCES wk_users(seq) not null,
+    category_seq number REFERENCES wk_favorites(favorite_seq) not null,
+    title varchar2(128) not null,
+    visible number default 1,
+    registerdate date default sysdate,
+    updatedate date default sysdate
+);
+
+create table wk_vocalist(
+    seq number primary key,
+    voca_seq number REFERENCES wk_vocabularies(seq) not null,
+    word_seq number REFERENCES wk_words(word_seq) not null,
+    registerdate date default sysdate,
+    updatedate date default sysdate
+);
+
+create table wk_words(
+    word_seq number primary key,
+    category number REFERENCES wk_favorite(seq),
+    word varchar2(256) not null,
+    meaning varchar2(2000) not null,
+    image varchar2(256),
+    user_seq number REFERENCES wk_users(seq) not null,
+    registerdate date default sysdate,
+    updatedate date default sysdate
+    ); 
+
 create table WK_USERS(
     seq number primary key,
     userid varchar2(1024) unique not null,
@@ -26,17 +55,6 @@ insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'鴉싩�
 insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'訝삣ĳ');
 insert into wk_jobs values((select nvl(max(job_seq),0)+1 from wk_jobs),'�걹�겗餓ε쨼�겓');
 
-create table wk_vocabularies(
-    seq number primary key,
-    user_seq number REFERENCES wk_users(seq) not null,
-    category_seq number REFERENCES wk_favorites(favorite_seq) not null,
-    title varchar2(128) not null,
-    contents varchar2(512) not null,
-    visible number default 1,
-    image varchar2(256),
-    registerdate date default sysdate,
-    updatedate date default sysdate
-);
 
 
 insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, 'test1', 1, sysdate, sysdate);
@@ -46,13 +64,6 @@ insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularie
 insert into wk_vocabularies values((select nvl(max(seq),0)+1 from wk_vocabularies), 1, 1, 'N2', 1, sysdate, sysdate);
 commit;
 
-create table wk_vocalist(
-    seq number primary key,
-    voca_seq number REFERENCES wk_vocabularies(seq) not null,
-    word_seq number REFERENCES wk_words(word_seq) not null,
-    registerdate date default sysdate,
-    updatedate date default sysdate
-);
 select category,word, meaning,image, (select userid from wk_users where userid = 'qwe') userId
 from wk_vocalist
 where (select seq from wk_vocabularies where seq = 1) =  (select voca_seq from wk_vocalist where voca_seq = 1);
@@ -68,16 +79,6 @@ insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 2, 6
 insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 8, sysdate, sysdate);
 insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 9, sysdate, sysdate);
 insert into wk_vocalist values((select nvl(max(seq),0)+1 from wk_vocalist), 3, 10, sysdate, sysdate);
-
-    
-create table wk_words(
-    word_seq number primary key,
-    word varchar2(256) not null,
-    meaning varchar2(2000) not null,
-    user_seq number REFERENCES wk_users(seq) not null,
-    registerdate date default sysdate,
-    updatedate date default sysdate
-    ); 
     
 insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '訝�', '�븯�굹', null, 1, sysdate, sysdate);    
 insert into wk_words values((select nvl(max(word_seq),0)+1 from wk_words),1, '雅�', '�몮', null, 1, sysdate, sysdate);    
