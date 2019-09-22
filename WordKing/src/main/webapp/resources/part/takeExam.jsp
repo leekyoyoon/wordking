@@ -35,8 +35,8 @@ $(function(){
 				str += '<div class="card">';
 				str += '<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">';
 				str += '<div class="card-body">';
-				str += '<h6 class="card-title">'+ result[i].title +'</h6>';
-				str += '<p class="card-text">작성자 : '+ result[i].userid +'</p>';
+				str += '<h6 class="card-title">単語帳の名前 :'+ result[i].title +'</h6>';
+				str += '<p class="card-text">作成者 : '+ result[i].userid +'</p>';
 				str += '<a href="testDetail?seq='+ result[i].seq +'" class="btn btn-primary">詳しく</a>';
 				str += '</div>';
 				str += '</div>';
@@ -49,7 +49,7 @@ $(function(){
 })
 
 </script>
-<h1>受験!</h1>
+<h1>受験</h1>
 <body>
 	<div id="test" class="card-deck" style="padding-bottom: 20px;">
 

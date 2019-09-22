@@ -35,7 +35,7 @@ public class WordController {
 			word.setMeaning(Meaning[i]);
 			word.setWord(WordName[i]);
 			int result = dao.insertWord(word);
-			System.out.println("result의값 (word_seq) : " + result);
+			System.out.println("result�쓽媛� (word_seq) : " + result);
 			word.setWord_seq(result);
 			if (result != 0) {
 				dao.insertVocaList(word);
@@ -69,13 +69,50 @@ public class WordController {
 			
 			voca.setUserid(users.getUserId());
 			
-			ArrayList<Word> result = dao.testDetail(voca);
+			Word result = dao.testDetail(voca);
 			
+			model.addAttribute("seq", voca.getSeq());
 			model.addAttribute("result", result);
 			
 			return "resources/part/testDetail";
 		}else{
 			return "resources/part/signIn";
 		}
+	}
+	
+	@RequestMapping(value="/StartTest",method=RequestMethod.POST)
+	@ResponseBody public ArrayList<Word> StartTest(int seq, HttpSession session) {
+		
+		ArrayList<Word> result = dao.startTest(seq);
+
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/Random",method=RequestMethod.POST)
+	@ResponseBody public ArrayList<Word> Random(int seq, HttpSession session) {
+		
+		ArrayList<Word> result = dao.Random(seq);
+
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/MeanTest",method=RequestMethod.POST)
+	@ResponseBody public ArrayList<Word> MeanTest(int seq, HttpSession session) {
+		
+		ArrayList<Word> result = dao.MeanTest(seq);
+
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/RanMean",method=RequestMethod.POST)
+	@ResponseBody public ArrayList<Word> RanMean(int seq, HttpSession session) {
+		
+		ArrayList<Word> result = dao.RanMean(seq);
+
+		
+		return result;
 	}
 }

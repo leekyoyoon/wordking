@@ -37,6 +37,7 @@ public class VocaController {
 		voca.setUserid(id);
 		System.out.println(voca.toString());
 		int result = 0;
+		
 		try {
 			result = vdao.insertVoca(voca);
 			System.out.println("result = " + result);

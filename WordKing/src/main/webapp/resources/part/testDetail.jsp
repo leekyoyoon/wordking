@@ -24,87 +24,183 @@
 <script src="resources/js/connect.js"></script>
 
 <script>
-	function wmChange(Word, Meaning){
+var RFlag = 0;
+var CFlag = 0;
 
-		for(var i = 0; i < Word.length; i++){ 
-			console.log(Word[i]); 
-		} 
-		for(var i = 0; i < Meaning.length; i++){ 
-			console.log(Meaning[i]); 
+$(function(){
+	
+	$('#da-slider').cslider({
+		autoplay	: true,
+		bgincrement	: 450
+	});
+	$("#sidebarrr").load("resources/part/sidebar.jsp");
+	var $banner = $(".banner").find("ul");
+
+});
+
+	function changeOrder(){
+		if(RFlag == 1){
+			RFlag = 0;
+			}
+		else if(RFlag == 0){
+			RFlag = 1;
+			}
+		}
+	
+	function changeWord(){
+		if(CFlag == 1){
+			CFlag = 0;
+			}
+		else if(CFlag == 0){
+			CFlag = 1;
+			}
 		}
 
-		var word = Word;
-		var meaning = Meaning;
-		var temp;
+	var count = 0;
+	
+	function TestStart(){
+		$('#StartTest').html('');
+		var str = '';
+		var strR = '';
+		if(RFlag == 0 && CFlag == 0){			//default 순서대로 단어가 문제
+			var Url = 'StartTest';
+		}
+		else if(RFlag == 1 && CFlag == 0){		//랜덤 순서대로 단어가 문제
+			var Url = 'Random';
+		}
+		else if(RFlag == 0 && CFlag == 1){		//순서대로 의미가 문제
+			var Url = 'MeanTest';
+		}
+		else if(RFlag == 1 && CFlag == 1){		//랜덤 순서대로 의미가 문제
+			var Url = 'RanMean';
+		}
+		$.ajax({
+			url:Url,
+			type:'post',
+			data:{
+				seq : ${seq}
+				},
+			success:function(result){
+					count = result.length;
+				
+					str+='<table class="table">';
+					str+='<thead class="table table-striped">';
+					str+='<tr>';
+					str+='<th scope="col">問題番号</th>';
+					str+='<th scope="col">問題</th>';
+					str+='<th scope="col">試験</th>';
+					str+='<th scope="col">正解確認</th>';
+					str+='<th scope="col"></th>';
+					str+='</tr>';
+					str+='</thead>';
+					str+='<tbody>';
+			
+					for(var i = 0; count > i; i++){
+						str+='<tr>';
+						str+='<th scope="row">'+(i+1)+'</th>';
+						str+='<td>'+result[i].word+'</td>';
+						str+='<td><input type="text" placeholder="答入力" id="userAnswer'+i+'"></td>';
+						str+='<td class="openColor'+i+'" id="check'+i+'"></td>';
+						str+='<td><input type="hidden" id="Meaning'+i+'" value="'+result[i].meaning+'"></td>';
+						str+='</tr>';
+						str+='</tbody>';
 
-		alert(word);
-		alert(meaning);
+						}
+					str+='</table>';
+				str += '<button type="button" class="btn btn-outline-primary" style="width: 50%; float:right;" onclick="openAnswer()">提出</button>';
 		
-		temp = word;
-		word = meaning;
-		meaning = temp;
-
-		$('#word').val(word);
-		$('#meaning').val(meaning);
-
-		alert(word);
-		alert(meaning);
+				$('#StartTest').append(str);
+				}
+			});
+	}
+	function openAnswer(){
+		var UserAnswer = '';
+		var Meaning = '';
+		
+		for(var i = 0; count > i; i++){
+			if($('#userAnswer'+i).val() == $('#Meaning'+i).val()){
+				$('.openColor'+i).css('background', 'lightblue');
+				$('#check'+i).html('O');
+				}
+			else{
+				$('.openColor'+i).css('color', 'red');
+				$('#check'+i).html('X (正解 : '+$('#Meaning'+i).val()+')');
+				}
+			}
+		
 	}
 </script>
 
-<div >
-	<h1>!単語帳の名前 : ${result[0].title}</h1>
-	<h6>作成者: ${result[0].userId }</h6>
-</div>
-<body>
-	<div>
-		<p>試験方法</p>
-		<input type="button" value="ランダム" id="random">
-		<input type="button" value="順序どおり" id="inOrder">
-		<input type="button" value="単語隠し" id="sercetWord">
-		<input type="button" value="意味隠し" id="sercetMean">	
-		<input type="button" value="誤答ノート" id="incorrectRate">	
-	</div>
 
-	<div >
-		<p>登録された単語</p>
-		<div id="question">
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th scope="col">ID</th>
-			      <th scope="col">Name</th>
-			      <th scope="col">Job Title</th>
-			      <th scope="col">Degree</th>
-			      <th scope="col">Salary</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <th scope="row">1</th>
-			      <td>Adrian Monino</td>
-			      <td>Front-End Engineer</td>
-			      <td>Computer Science</td>
-			      <td>$120,000</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>Socrates Itumay</td>
-			      <td>Software Engineer</td>
-			      <td>Computer Engineering</td>
-			      <td>$150,000</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td>Reynante Labares</td>
-			      <td>Product Manager</td>
-			      <td>Business Management</td>
-			      <td>$250,000</td>
-			    </tr>
-			  </tbody>
-			</table>
+<body>
+<aside class="aside aside-fixed" id="sidebarrr" style="position: fixed;">
+</aside>
+ <div class="content ht-100v pd-0">
+
+      <div class="content-header">
+        <div class="content-search">
+          <i data-feather="search"></i>
+          <input type="search" class="form-control" placeholder="Search...">
+        </div>
+        <nav class="nav">
+  
+          <a href="" class="nav-link"><i data-feather="help-circle" style="width: 2em;height:2em;"></i></a>
+          <a href="" class="nav-link"><i data-feather="grid" style="width: 2em;height:2em;"></i></a>
+          <a href="goMypage" class="nav-link"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
+        </nav>
+      </div>
+      <!-- content-header -->
+      <div class="content-body" id="contents-body">
+    <div >
+		<h1>@単語帳の名前 : ${result.title}</h1>
+	</div>
+	<div id="exam">
+		<p>試験の例示及び方法の選択!</p>
+		<div id="selectTest" class="d-flex">
+			<div>
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="changeOrder()">
+				 	 <label class="custom-control-label" for="customSwitch1">ランダム発売 </label>
+				 </div>
+			</div>
+			<div class="mg-sm-l-50">		 
+				 <div class="custom-control custom-switch">
+					 <input type="checkbox" class="custom-control-input" id="customSwitch2" onclick="changeWord()">
+					 <label class="custom-control-label" for="customSwitch2">問題と答転換</label>
+				 </div>
+			</div>
+		</div>
+		
+			<div id="example" style="width: 50%; ">
+				<table class="table table-primary"	>
+				  <tbody>
+				   <thead>
+					    <tr>
+					      <th scope="col">문제</th>
+					      <th scope="col">답</th>
+					    </tr>
+					  </thead>
+				  	<tr>
+				  		<td>
+				  			${result.word }
+				  		</td>
+				  		<td>
+				  			${result.meaning }
+				  		</td>
+				  	</tr>
+				  </tbody>
+				</table>
+			</div>
+	</div>
+	<a class="btn btn-outline-primary" data-toggle="collapse" href="#test" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="TestStart()">試験開始</a>
+	
+	<div class="collapse mg-t-5" id="test">
+		<div id="StartTest" style="width:50%; float:left; margin:5px; ">
+	  		
 		</div>
 	</div>
+	</div>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="resources/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -114,6 +210,7 @@
     
     <script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
 	<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+</div>
 </body>
 <style>
 

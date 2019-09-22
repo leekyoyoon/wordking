@@ -48,11 +48,31 @@
 	
 	<select id="testDetail" parameterType="Voca" resultType="Word">
 		select 
-			S.seq word_seq, 
-			S.CATEGORY_SEQ category_seq, 
+			W.word_seq word_seq, 
 			W.WORD word, 
 			W.MEANING meaning, 
-			W.IMAGE image, 
+			u.userid userid, 
+			V.REGISTERDATE registerdate, 
+			V.UPDATEDATE updatedate, 
+			S.TITLE title
+		from 
+			wk_vocalist V,
+			wk_vocabularies S,
+			WK_WORDS W,
+			WK_USERS U
+		where 
+			1 >= ROWNUM and
+			V.VOCA_SEQ = S.SEQ AND 
+			S.USER_SEQ = (select seq from wk_users where userid = #{userid}) and 
+			v.word_seq = w.word_seq and 
+			S.SEQ = #{seq}
+	</select>
+	
+	<select id="startTest" resultType="Word">
+		select 
+			W.word_seq word_seq, 
+			W.WORD word, 
+			W.MEANING meaning, 
 			u.userid userid, 
 			V.REGISTERDATE registerdate, 
 			V.UPDATEDATE updatedate, 
@@ -64,9 +84,72 @@
 			WK_USERS U
 		where 
 			V.VOCA_SEQ = S.SEQ AND 
-			S.USER_SEQ = (select seq from wk_users where userid = #{userid}) and 
 			v.word_seq = w.word_seq and 
 			S.SEQ = #{seq}
+			order by  word_seq asc
+	</select>
+	
+	<select id="Random" resultType="Word">
+		select 
+			W.word_seq word_seq, 
+			W.WORD word, 
+			W.MEANING meaning, 
+			u.userid userid, 
+			V.REGISTERDATE registerdate, 
+			V.UPDATEDATE updatedate, 
+			S.TITLE title
+		from 
+			wk_vocalist V,
+			wk_vocabularies S,
+			WK_WORDS W,
+			WK_USERS U
+		where 
+			V.VOCA_SEQ = S.SEQ AND 
+			v.word_seq = w.word_seq and 
+			S.SEQ = #{seq}
+			ORDER BY dbms_random.value
+	</select>
+	
+	<select id="MeanTest" resultType="Word">
+		select 
+			W.word_seq word_seq, 
+			W.WORD meaning, 
+			W.MEANING word, 
+			u.userid userid, 
+			V.REGISTERDATE registerdate, 
+			V.UPDATEDATE updatedate, 
+			S.TITLE title
+		from 
+			wk_vocalist V,
+			wk_vocabularies S,
+			WK_WORDS W,
+			WK_USERS U
+		where 
+			V.VOCA_SEQ = S.SEQ AND 
+			v.word_seq = w.word_seq and 
+			S.SEQ = #{seq}
+			order by  word_seq asc
+	</select>
+	
+	<select id="RanMean" resultType="Word">
+		select 
+			W.word_seq word_seq, 
+			W.WORD meaning, 
+			W.MEANING word, 
+			u.userid userid, 
+			V.REGISTERDATE registerdate, 
+			V.UPDATEDATE updatedate, 
+			S.TITLE title
+		from 
+			wk_vocalist V,
+			wk_vocabularies S,
+			WK_WORDS W,
+			WK_USERS U
+		where 
+			V.VOCA_SEQ = S.SEQ AND 
+			v.word_seq = w.word_seq and 
+			S.SEQ = #{seq}
+			ORDER BY dbms_random.value
 	</select>
 	
 	

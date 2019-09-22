@@ -31,20 +31,51 @@ public class WordDAO {
 		return result;
 	}
 
-	public ArrayList<Word> testDetail(Voca voca) {
+	public Word testDetail(Voca voca) {
 		WordMapper mapper = session.getMapper(WordMapper.class);
-
-		ArrayList<Word> result = mapper.testDetail(voca);
-
+		
+		Word result = mapper.testDetail(voca);
+		
 		return result;
 	}
 
+	public ArrayList<Word> startTest(int seq) {
+		WordMapper mapper = session.getMapper(WordMapper.class);
+		
+		ArrayList<Word> result = mapper.startTest(seq);
+		return result;
+	}
+
+	public ArrayList<Word> Random(int seq) {
+		WordMapper mapper = session.getMapper(WordMapper.class);
+			
+		ArrayList<Word> result = mapper.Random(seq);
+		return result;
+	}
+
+	public ArrayList<Word> MeanTest(int seq) {
+		WordMapper mapper = session.getMapper(WordMapper.class);
+		
+		ArrayList<Word> result = mapper.MeanTest(seq);
+		return result;
+	}
+
+	public ArrayList<Word> RanMean(int seq) {
+		WordMapper mapper = session.getMapper(WordMapper.class);
+		
+		ArrayList<Word> result = mapper.RanMean(seq);
+		return result;
+	}
+	
 	public int insertVocaList(Word word) {
 		WordMapper mapper = session.getMapper(WordMapper.class);
-
+		
 		int result = mapper.insertVocaList(word);
-
+		
 		return result;
-
+		
 	}
 }
+
+
+
