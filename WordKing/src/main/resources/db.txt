@@ -7,6 +7,8 @@ create table wk_vocabularies(
     user_seq number REFERENCES wk_users(seq) not null,
     category_seq number REFERENCES wk_favorites(favorite_seq) not null,
     title varchar2(128) not null,
+    image varchar2(256),
+    contents varchar2(512) not null,
     visible number default 1,
     registerdate date default sysdate,
     updatedate date default sysdate

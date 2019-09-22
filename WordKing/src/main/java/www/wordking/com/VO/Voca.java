@@ -19,5 +19,6 @@ public class Voca {
 	private int visible;  		  //visible number default 1,
 	private Date registerdate;    //registerdate date default sysdate,
 	private Date updatedate;    //updatedate date default sysdate
-	private String userid;		//userid ¿ë
+	private String userid;		//userid ï¿½ï¿½
+	private String image;
 }
