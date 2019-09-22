@@ -131,4 +131,6 @@ public class HomeController {
 		
 		return "WEB-INF/views/insertVoca";
 	}
+	
+	
 }

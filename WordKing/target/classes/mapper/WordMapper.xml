@@ -5,22 +5,69 @@
 
 <!-- 게시판 처리 SQL -->
 <mapper namespace="www.wordking.com.Mapper.WordMapper">
+	<insert id="insertVocaList" parameterType="Word">
+	INSERT INTO WK_VOCALIST
+		(
+			SEQ,
+			VOCA_SEQ,
+			WORD_SEQ
+		) VALUES(
+			(SELECT NVL(MAX(SEQ),0)+1 FROM WK_VOCALIST),
+			(SELECT MAX(SEQ) FROM wk_vocabularies),
+			(SELECT MAX(WORD_SEQ)  FROM WK_WORDS)
+		)
+	</insert>
+
 	<insert id="insertWord" parameterType="Word">
 		insert into wk_words(
 			word_seq,
-		    category,
 		    word,
 		    meaning,
-		    image,
 		    user_seq
 		)
 		values(
 			(SELECT NVL(MAX(word_seq),0)+1 FROM wk_words),
-			#{category},
 			#{word},
 			#{meaning},
-			#{image},
 			(select seq from WK_USERS where userId = #{userId})	
 		)
 	</insert>
+	
+	<select id="searchVoca" parameterType="Voca" resultType="Voca">
+		select 
+			seq,
+			(select seq from wk_users where userid = #{userid}) user_seq, 
+			category_seq, 
+			title , 
+			(select userid from wk_users where userid = #{userid}) userid
+		from 
+			wk_vocabularies
+		where
+			user_seq = (select seq from wk_users where userid = #{userid})
+	</select>
+	
+	<select id="testDetail" parameterType="Voca" resultType="Word">
+		select 
+			S.seq word_seq, 
+			S.CATEGORY_SEQ category_seq, 
+			W.WORD word, 
+			W.MEANING meaning, 
+			W.IMAGE image, 
+			u.userid userid, 
+			V.REGISTERDATE registerdate, 
+			V.UPDATEDATE updatedate, 
+			S.TITLE title
+		from 
+			wk_vocalist V,
+			wk_vocabularies S,
+			WK_WORDS W,
+			WK_USERS U
+		where 
+			V.VOCA_SEQ = S.SEQ AND 
+			S.USER_SEQ = (select seq from wk_users where userid = #{userid}) and 
+			v.word_seq = w.word_seq and 
+			S.SEQ = #{seq}
+	</select>
+	
+	
 </mapper>

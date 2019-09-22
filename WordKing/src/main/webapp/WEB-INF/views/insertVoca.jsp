@@ -27,11 +27,65 @@
 	$(function(){
 		$("#sidebarrr").load("resources/part/sidebar.jsp");
 		$('.select2').select2();
+		$("#registerBtn").click(function(){
+			var Title = $("#title").val();
+			var Contents = $("#contents").val();
+			var Category_seq = $("#category_seq").val();
+			var Visible = $("#visible").val();
+			alert(Title+", "+Contents+", "+Category_seq+", "+Visible);
+			$.ajax({
+				url:'createVoca',
+				data:{
+					title : Title,
+					contents : Contents,
+					category_seq : Category_seq,
+					visible : Visible
+				},
+				type:'POST',
+				success:function(Data){
+					if (Data=='false') {
+						alert("단어장 등록에 오류가 생겼습니다..");
+					} else if (Data=='true') {
+						$.ajaxSettings.traditional = true;
+						$.ajax({
+							url:'insertWord',
+							data:$("#inputDDiv").serialize(),	
+							type:'POST',
+							success:function(Data){
+								if (Data == 'false') {
+									alert("단어등록에 오류가 생겼습니다..");
+								} else if (Data=='true') {
+									$("#createVoca").submit();
+									
+								}
+								
+							}
+						})
+						
+					}
+				}
+			});
+			
+		});
 		$('#plusinput').click(function(){
-			contents='<input type="text" placeholder="1번째">';
-			$("#inputDiv").append(contents);
+			var contents ='<hr style="width:100%;">';
+			contents+='<div class="TermContent-inner-padding">';
+			contents+='<label class="" style="width: 40%;margin-right:10%;">';
+	    	contents+='<span><input type="text"  class="textbox" name="WordName"></span>';
+	    	contents+='<span class="UITextarea-border" style="width: 100%;margin-right:0px;"></span> ';		
+			contents+='<span class="UITextarea-label" style="width: 100%;margin-right:0px;">単語</span></label>';			
+			contents+='<label class="" style="width: 40%;margin-right: 0px;float: right;">';
+	    	contents+='<span><input type="text"  class="textbox" name="Meaning"></span>';
+	    	contents+='<span class="UITextarea-border" style="width: 100%;margin-right:0px;"></span>';		
+			contents+='<span class="UITextarea-label" style="width: 100%;margin-right:0px;">意味</span></label></div>';			
+			
+			$("#plusss").append(contents);
 		})
 	});
+	function insertImage(){
+		$("#createVoca").submit();
+	}
+
 	
 	function readURL(input) {
 		  if (input.files && input.files[0]) {
@@ -88,27 +142,27 @@
       <div class="content-body" id="contents-body">
 	
 		<h1>単語帳 作成</h1>
-		<form id="form1" class="needs-validation was-validated" novalidate>
+		<form id="createVoca" action="insertImage" class="needs-validation was-validated" novalidate method="POST" enctype="multipart/form-data">
 		<div class="row">
 	<div class="col-sm-4" style="margin-bottom: 1%;">
 	<label for="formGroupExampleInput" class="d-block">タイトル</label>
-      <input type="text" class="form-control" placeholder="Invalid state" required >
+      <input type="text" class="form-control" id="title" placeholder="Invalid state" required >
       <div class="invalid-feedback">This is required</div>
     </div>
     <div class="col-sm-2" style="margin-bottom: 1%;">
     <label for="formGroupExampleInput" class="d-block">カテゴリー</label>
-    <select class="select2" style="width: 100%;" size="4" >
-    	<option value="1" selected="selected">韓国語</option>
-    	<option value="2">日本語</option>	
-    	<option value="3">ドイツ語</option>
-    	<option value="3">英語</option>
-    	<option value="3">中国語</option>    	
+    <select class="select2" style="width: 100%;" size="4" id="category_seq">
+    	<option value="5" selected="selected">韓国語</option>
+    	<option value="1">日本語</option>	
+    	<option value="3">フランス語</option>
+    	<option value="2">英語</option>
+    	<option value="4">中国語</option>    	
     </select>
    		
     </div>
     <div class="col-sm-2" style="margin-bottom: 1%;">
     <label for="formGroupExampleInput" class="d-block">visible</label>
-    <select class="select2" style="width: 100%;" >
+    <select class="select2" style="width: 100%;" id="visible">
     	<option value="1" selected="selected">全部公開</option>
     	<option value="2">フレンドだけ公開</option>	
     	<option value="3">非公開</option>
@@ -120,18 +174,19 @@
     <div class="row">
      <div class="col-sm-4">
      <label for="formGroupExampleInput" class="d-block">内容</label>
-      <textarea class="form-control" rows="10" style="resize: none;overflow: auto;" placeholder="Invalid state" required></textarea>
+      <textarea class="form-control" rows="10" id="contents" style="resize: none;overflow: auto;" placeholder="Invalid state" required></textarea>
       <div class="invalid-feedback">This is required</div>
     </div>
      <div class="col-sm-4">
-      <label for="formGroupExampleInput" class="d-block">内容</label>
+      
+      <label for="formGroupExampleInput" class="d-block">イメージ</label>
      
      <div class="file-upload">
      
   <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
 
   <div class="image-upload-wrap">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="uploadFile"/>
     <div class="drag-text">
       <h3 style="margin-bottom: 4px;">Drag And select add Image</h3>
     </div>
@@ -147,40 +202,35 @@
      <div class="col-sm-4" style="padding-top: 85px;">
      <label for="formGroupExampleInput" class="d-block">  </label>
      
-     <button type="button" class="btn btn-primary" style="width: 100%;height:85%;font-size: 3em;">登録</button>
+     <button type="button" class="btn btn-primary" id="registerBtn" style="width: 100%;height:85%;font-size: 3em;">登録</button>
      </div>
     </div>
     </form>
+    <!-- </form> -->
     <hr>
     <h1>単語追加</h1>
     
+    <form action="" id="inputDDiv">
     <div id="inputDiv">
-    <div class="TermContent-inner"> 
-    	<div><span><input type="button" value="削除"></span></div>
+    <div class="TermContent-inner" id="plusss"> 
     	<div class="TermContent-inner-padding">
-    	<div class="TermContent-side">
-    		<div class="TermContent-side--word">
-    			<label class="UITextarea"	>
-				<span><input type="text" placeholder="単語"></span>
-				<span class="UITextarea-border"></span>   		
-				<span class="UITextarea-label">単語</span>
+    			<label class="" style="width: 40%;margin-right:10%;">
+				<span><input type="text" class="textbox" name="WordName"></span>
+				<span class="UITextarea-border" style="width: 100%;margin-right:0px;"></span>   		
+				<span class="UITextarea-label" style="width: 100%;margin-right:0px;">単語</span>
 				</label>
-    		</div>
-    		<div class="TermContent-side--word">
-    			<label class="UITextarea">
-				<span><input type="text" placeholder="意味"></span>
-				<span class="UITextarea-border"></span>   		
-				<span class="UITextarea-label">意味</span>
+				<label class="" style="width: 40%;margin-right: 0px;float: right;">
+				<span><input type="text" class="textbox" name="Meaning"></span>
+				<span class="UITextarea-border" style="width: 100%;margin-right:0px;"></span>   		
+				<span class="UITextarea-label" style="width: 100%;margin-right:0px;">意味</span>
 				</label>
-    		</div>単語王
-    	</div>
     	</div>
     </div>
-    <div  class="TermContent-inner">
-    	<div>
+    <div  class="TermContent-inner" style="text-align: center;">
+    	<div style="padding-bottom: 5%;width: 80%;height:10%;">
     	<a class="TermContent-addRow" id="plusinput">
     		<span class="TermContent-addRowButton">
-    			<button class="" type="button">
+    			<button class="btn btn-primary" type="button" style="width: 80%;">
     				<span >+ カード追加</span>
     			</button>
     		</span>
@@ -189,6 +239,7 @@
     </div>
     
     </div>
+    </form>
 	</div>
 	
     <!-- <button id="plusinput">追加</button>
@@ -358,7 +409,7 @@ border: 3px solid #fff;
 }
 
 .TermContent-inner{
-	background-color: #fff;
+	background-color: #parent;
     position: relative;
 }
 .TermContent-side--word{
@@ -403,7 +454,8 @@ border: 3px solid #fff;
     line-height: 1.444444444444444;
 }
 .TermContent-inner-padding {
-    padding: .75rem .75rem 1.5rem 4.625rem;
+	padding: 2% 10% 2% 10%;
+    background-color: #parent;
 }
 .TermContent-addRowButton {
     white-space: nowrap;
@@ -442,5 +494,27 @@ border: 3px solid #fff;
     top: 0;
     z-index: 100;
 }
+
+.textbox{
+width:100%;
+border:none;
+border-right:0px; 
+border-top:0px; 
+boder-left:0px; 
+boder-bottom:0px;
+background: transparent;
+}
+.textbox:focus{
+
+border:none;
+border-right:0px; 
+border-top:0px; 
+boder-left:0px; 
+boder-bottom:0px;
+}
+.TermContent-side--word{
+width: 100%;
+}
+
 </style>
 </html>

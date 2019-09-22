@@ -5,21 +5,30 @@
 
 <!-- 게시판 처리 SQL -->
 <mapper namespace="www.wordking.com.Mapper.WordMapper">
+	<insert id="insertVocaList" parameterType="Word">
+	INSERT INTO WK_VOCALIST
+		(
+			SEQ,
+			VOCA_SEQ,
+			WORD_SEQ
+		) VALUES(
+			(SELECT NVL(MAX(SEQ),0)+1 FROM WK_VOCALIST),
+			(SELECT MAX(SEQ) FROM wk_vocabularies),
+			(SELECT MAX(WORD_SEQ)  FROM WK_WORDS)
+		)
+	</insert>
+
 	<insert id="insertWord" parameterType="Word">
 		insert into wk_words(
 			word_seq,
-		    category,
 		    word,
 		    meaning,
-		    image,
 		    user_seq
 		)
 		values(
 			(SELECT NVL(MAX(word_seq),0)+1 FROM wk_words),
-			#{category},
 			#{word},
 			#{meaning},
-			#{image},
 			(select seq from WK_USERS where userId = #{userId})	
 		)
 	</insert>
@@ -59,4 +68,6 @@
 			v.word_seq = w.word_seq and 
 			S.SEQ = #{seq}
 	</select>
+	
+	
 </mapper>

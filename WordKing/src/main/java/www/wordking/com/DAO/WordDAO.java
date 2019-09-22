@@ -17,25 +17,34 @@ public class WordDAO {
 
 	public int insertWord(Word word) {
 		WordMapper mapper = session.getMapper(WordMapper.class);
-		
+
 		int result = mapper.insertWord(word);
-		
+
 		return result;
 	}
 
 	public ArrayList<Voca> searchVoca(Voca voca) {
 		WordMapper mapper = session.getMapper(WordMapper.class);
-				
+
 		ArrayList<Voca> result = mapper.searchVoca(voca);
-		
+
 		return result;
 	}
-	
+
 	public ArrayList<Word> testDetail(Voca voca) {
 		WordMapper mapper = session.getMapper(WordMapper.class);
-		
+
 		ArrayList<Word> result = mapper.testDetail(voca);
-		
+
 		return result;
+	}
+
+	public int insertVocaList(Word word) {
+		WordMapper mapper = session.getMapper(WordMapper.class);
+
+		int result = mapper.insertVocaList(word);
+
+		return result;
+
 	}
 }

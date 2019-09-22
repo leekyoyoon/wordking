@@ -7,9 +7,8 @@ import www.wordking.com.VO.Word;
 
 public interface WordMapper {
 
-	int insertWord(Word word);
-
-	ArrayList<Voca> searchVoca(Voca voca);
-	
-	ArrayList<Word> testDetail(Voca voca);
+	public int insertWord(Word word);
+	public ArrayList<Voca> searchVoca(Voca voca);
+	public ArrayList<Word> testDetail(Voca voca);
+	public int insertVocaList(Word word);
 }

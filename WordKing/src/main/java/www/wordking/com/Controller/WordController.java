@@ -26,15 +26,24 @@ public class WordController {
 
 	@RequestMapping(value="/insertWord",method=RequestMethod.POST)
 	@ResponseBody
-	public int insertWord(Word word,HttpSession session) {
+	public String insertWord(String[] WordName,String[] Meaning,HttpSession session) {
+		Word word = new Word();
 		word.setUserId((String)session.getAttribute("loginId"));
 		
-		System.out.println(word);
-		
-		int result = dao.insertWord(word);
-		
-		return result;
+		for (int i = 0; i < Meaning.length; i++) {
+			System.out.println(WordName[i].toString() +" : "+Meaning[i].toString());
+			word.setMeaning(Meaning[i]);
+			word.setWord(WordName[i]);
+			int result = dao.insertWord(word);
+			System.out.println("result의값 (word_seq) : " + result);
+			word.setWord_seq(result);
+			if (result != 0) {
+				dao.insertVocaList(word);
+			}
+		}
+		return "true";
 	}
+
 	
 	@RequestMapping(value="/searchVoca",method=RequestMethod.POST)
 	@ResponseBody

@@ -15,5 +15,6 @@
 		<mapper resource="mapper/UsersMapper.xml" />
 		<mapper resource="mapper/CsMapper.xml" />
 		<mapper resource="mapper/WordMapper.xml" />
+		<mapper resource="mapper/VocaMapper.xml" />
 	</mappers> 
 </configuration>

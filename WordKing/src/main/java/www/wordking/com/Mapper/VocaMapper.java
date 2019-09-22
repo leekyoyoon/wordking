@@ -5,4 +5,5 @@ import www.wordking.com.VO.Voca;
 public interface VocaMapper {
 
 	public int insertVoca(Voca voca);
+	public int insertImage(Voca voca);
 }

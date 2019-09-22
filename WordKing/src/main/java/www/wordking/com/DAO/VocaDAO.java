@@ -19,4 +19,11 @@ public class VocaDAO {
 		int result = mapper.insertVoca(voca);
 		return result;
 	}
+
+	public int insertImage(Voca voca) {
+		VocaMapper mapper = session.getMapper(VocaMapper.class);
+		int result = mapper.insertImage(voca);
+		return result;
+	}
+
 }

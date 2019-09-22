@@ -6,32 +6,33 @@
 <!-- 게시판 처리 SQL -->
 <mapper namespace="www.wordking.com.Mapper.VocaMapper">
 	<insert id="insertVoca" parameterType="Voca">
-
-	INSERT INTO WK_VOCABULARIES
+	<selectKey keyProperty="seq" resultType="java.lang.Integer" order="BEFORE">
+	(SELECT NVL(MAX(SEQ),0)+1 FROM wk_vocabularies)
+	</selectKey>
+	INSERT INTO wk_vocabularies
 	(
 		SEQ,
-		WORD_SEQ,
 		USER_SEQ,
 		CATEGORY_SEQ,
 		TITLE
-		<if test="contents != null and contents != ''">
 		,CONTENTS
-		</if>
-		<if test="visible != null and visible != '' and visible != 0">
 		,VISIBLE
-		</if>
 	) VALUES(
-		#{seq},
-		#{word_seq},
-		#{user_seq},
+		(SELECT NVL(MAX(SEQ),0)+1 FROM wk_vocabularies),
+		(SELECT TO_NUMBER(SEQ) FROM WK_USERS WHERE userId = #{userid}),
 		#{category_seq},
-		#{title}
-		<if test="contents != null and contents != ''">
-		,#{contents}
-		</if>
-		<if test="visible != null and visible != '' and visible != 0">
-		,#{visible}
-		</if>
+		#{title},
+		#{contents},
+		#{visible}
 	)
+	
 	</insert>
+	<update id="insertImage" parameterType="Voca">
+		UPDATE wk_vocabularies
+			SET
+			IMAGE = #{image}
+		WHERE
+			SEQ = (SELECT MAX(SEQ) FROM wk_vocabularies)
+	</update>
+	
 </mapper>

@@ -19,23 +19,6 @@
 			WK_NOTICE
 	</select>
 	
-	<!-- 공지사항 상세 출력 -->
-	<select id="selectOneFaq" parameterType="int"   resultType="Faq">
-		SELECT
-			noticeNum
-			,noticeTitle
-			,noticeContents
-			,TO_CHAR(noticeDate,'YYYY-MM-DD') noticeDate
-			,adminId
-			,count
-		FROM 
-			WK_FAQ
-		WHERE
-			faqnum = #{faqnum}
-	</select>
-	
-	
-	
 	<!-- FAQ 자주묻는질문 리스트 출력 -->
 	<select id="selectFaqList" resultType="Faq">
 		SELECT
@@ -50,5 +33,43 @@
 		FROM 
 			WK_FAQ
 	</select>
+	
+	<!-- 1대1 문의 등록  -->
+	<insert id="insertInquiry" parameterType="Inquiry">
+		INSERT INTO WK_INQUIRY (
+			INQUIRYNUM
+			,INQUIRYCATEGORY
+			,INQUIRYTITLE
+			,INQUIRYCONTENT
+			,INQUIRYUSERID
+			,INQUIRYDATE
+			,INQUIRYUPLOAD			
+		)
+		VALUES (
+			wkinquiry_seq.nextval
+			,#{inquirycategory}
+			,#{inquirytitle}
+			,#{inquirycontent}
+			,#{inquiryuserid}
+			,sysdate
+			,#{inquiryupload}
+		)	
+	</insert>
+	
+	<!-- 1대1 문의 출력 -->
+	<select id="selectInquiryList" parameterType="String"   resultType="Inquiry">
+		SELECT
+			inquiryNum
+			,inquirycategory
+			,inquirytitle
+			,inquiryuserid
+			,TO_CHAR(noticeDate,'YYYY-MM-DD') inquirydate
+			,inquiryupload
+		FROM 
+			WK_INQUIRY
+		WHERE
+			inquiryuserid = #{inquiryuserid}
+	</select>
+	
 	
 </mapper> 
