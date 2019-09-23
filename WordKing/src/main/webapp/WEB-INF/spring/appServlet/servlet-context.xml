@@ -34,6 +34,18 @@
 	
 	<context:component-scan base-package="www.wordking.com" />
 	
+	<!-- interceptor 등록 -->
+	<beans:bean id="loginInterceptor" class="www.wordking.com.interceptor.LoginInterceptor" />
 	
+	<!-- 아래 주석을 제거하여 interceptor 적용 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/insertVoca"/>
+			<mapping path="/goVocaList"/><!-- 컨트롤단에 있는 value값을 여기에다가 적는다. -->
+			
+						
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors> 
 	
 </beans:beans>
