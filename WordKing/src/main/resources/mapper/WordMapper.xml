@@ -72,16 +72,14 @@
 		select 
 			W.word_seq word_seq, 
 			W.WORD word, 
-			W.MEANING meaning, 
-			u.userid userid, 
+			W.MEANING meaning,  
 			V.REGISTERDATE registerdate, 
 			V.UPDATEDATE updatedate, 
 			S.TITLE title
 		from 
 			wk_vocalist V,
 			wk_vocabularies S,
-			WK_WORDS W,
-			WK_USERS U
+			WK_WORDS W
 		where 
 			V.VOCA_SEQ = S.SEQ AND 
 			v.word_seq = w.word_seq and 
@@ -93,16 +91,14 @@
 		select 
 			W.word_seq word_seq, 
 			W.WORD word, 
-			W.MEANING meaning, 
-			u.userid userid, 
+			W.MEANING meaning,  
 			V.REGISTERDATE registerdate, 
 			V.UPDATEDATE updatedate, 
 			S.TITLE title
 		from 
 			wk_vocalist V,
 			wk_vocabularies S,
-			WK_WORDS W,
-			WK_USERS U
+			WK_WORDS W
 		where 
 			V.VOCA_SEQ = S.SEQ AND 
 			v.word_seq = w.word_seq and 
@@ -114,16 +110,14 @@
 		select 
 			W.word_seq word_seq, 
 			W.WORD meaning, 
-			W.MEANING word, 
-			u.userid userid, 
+			W.MEANING word,  
 			V.REGISTERDATE registerdate, 
 			V.UPDATEDATE updatedate, 
 			S.TITLE title
 		from 
 			wk_vocalist V,
 			wk_vocabularies S,
-			WK_WORDS W,
-			WK_USERS U
+			WK_WORDS W
 		where 
 			V.VOCA_SEQ = S.SEQ AND 
 			v.word_seq = w.word_seq and 
@@ -136,15 +130,13 @@
 			W.word_seq word_seq, 
 			W.WORD meaning, 
 			W.MEANING word, 
-			u.userid userid, 
 			V.REGISTERDATE registerdate, 
 			V.UPDATEDATE updatedate, 
 			S.TITLE title
 		from 
 			wk_vocalist V,
 			wk_vocabularies S,
-			WK_WORDS W,
-			WK_USERS U
+			WK_WORDS W
 		where 
 			V.VOCA_SEQ = S.SEQ AND 
 			v.word_seq = w.word_seq and 
