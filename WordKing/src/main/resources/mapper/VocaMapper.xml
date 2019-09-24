@@ -35,4 +35,44 @@
 			SEQ = (SELECT MAX(SEQ) FROM wk_vocabularies)
 	</update>
 	
+	<select id="totalSearch" parameterType="String" resultType="Voca">
+		select DISTINCT 
+            s.seq ,
+			s.category_seq, 
+			s.title , 
+			u.userid userid
+		from 
+			wk_vocabularies s,
+			WK_USERS U
+        where s.USER_SEQ = u.seq and
+            s.title like '%'||#{search_value}||'%' 
+	</select>
+	
+	<select id="MySearch" parameterType="Voca" resultType="Voca">
+		select DISTINCT 
+            s.seq ,
+			s.category_seq, 
+			s.title , 
+			u.userid userid
+		from 
+			wk_vocabularies s,
+			WK_USERS U
+        where s.USER_SEQ = u.seq and
+            s.title like '%'||#{title}||'%'  and
+            u.userid = #{userid}
+	</select>
+	
+	<select id="myVoca" parameterType="Voca" resultType="Voca">
+		select 
+			seq,
+			(select seq from wk_users where userid = #{userid}) user_seq, 
+			category_seq, 
+			title , 
+			(select userid from wk_users where userid = #{userid}) userid
+		from 
+			wk_vocabularies
+		where
+			user_seq = (select seq from wk_users where userid = #{userid})
+	</select>
+	
 </mapper>

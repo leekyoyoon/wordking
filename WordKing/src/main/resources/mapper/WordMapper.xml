@@ -144,5 +144,21 @@
 			ORDER BY dbms_random.value
 	</select>
 	
-	
+	<select id="showdetail" resultType="Word">
+		select 
+			W.word_seq word_seq, 
+			W.WORD word, 
+			W.MEANING meaning ,
+			V.REGISTERDATE registerdate, 
+			V.UPDATEDATE updatedate, 
+			S.TITLE title
+		from 
+			wk_vocalist V,
+			wk_vocabularies S,
+			WK_WORDS W
+		where 
+			V.VOCA_SEQ = S.SEQ AND 
+			v.word_seq = w.word_seq and 
+			S.SEQ = #{seq}
+	</select>
 </mapper>

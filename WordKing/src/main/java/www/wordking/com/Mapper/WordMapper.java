@@ -19,4 +19,5 @@ public interface WordMapper {
 
 	public ArrayList<Word> RanMean(int seq);
 	public int insertVocaList(Word word);
+	public ArrayList<Word> showdetail(int seq);
 }

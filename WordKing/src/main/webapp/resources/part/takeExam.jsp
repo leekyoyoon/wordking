@@ -24,6 +24,8 @@
 <script src="resources/js/connect.js"></script>
 <script>
 $(function(){
+	$("#sidebarrr").load("resources/part/sidebar.jsp");
+	
 	$.ajax({
 		url:"searchVoca",
 		type:"post",
@@ -49,8 +51,27 @@ $(function(){
 })
 
 </script>
-<h1>受験</h1>
 <body>
+<aside class="aside aside-fixed" id="sidebarrr" style="position: fixed;">
+</aside>
+ <div class="content ht-100v pd-0">
+
+
+      <div class="content-header">
+        <div class="content-search">
+          <i data-feather="search"></i>
+          <input type="search" class="form-control" placeholder="Search...">
+        </div>
+        <nav class="nav">
+  
+          <a href="" class="nav-link"><i data-feather="help-circle" style="width: 2em;height:2em;"></i></a>
+          <a href="" class="nav-link"><i data-feather="grid" style="width: 2em;height:2em;"></i></a>
+          <a href="goMypage" class="nav-link"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
+        </nav>
+      </div>
+      <!-- content-header -->
+<h1>受験</h1>
+      <div class="content-body" id="contents-body">
 	<div id="test" class="card-deck" style="padding-bottom: 20px;">
 
 	</div>
@@ -67,6 +88,9 @@ $(function(){
     
     <script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
 	<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+</div>
+</div>
+
 </body>
 <style>
 

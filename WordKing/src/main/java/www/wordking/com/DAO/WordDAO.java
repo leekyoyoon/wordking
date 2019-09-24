@@ -75,6 +75,13 @@ public class WordDAO {
 		return result;
 		
 	}
+	
+	public ArrayList<Word> showdetail(int seq) {
+		WordMapper mapper = session.getMapper(WordMapper.class);
+				
+		ArrayList<Word> result = mapper.showdetail(seq);
+		return result;
+	}
 }
 
 

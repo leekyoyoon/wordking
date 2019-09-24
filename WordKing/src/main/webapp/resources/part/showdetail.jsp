@@ -29,102 +29,65 @@ var CFlag = 0;
 
 $(function(){
 	
+	$('#da-slider').cslider({
+		autoplay	: true,
+		bgincrement	: 450
+	});
 	$("#sidebarrr").load("resources/part/sidebar.jsp");
 	var $banner = $(".banner").find("ul");
 
 });
-
-	function changeOrder(){
-		if(RFlag == 1){
-			RFlag = 0;
-			}
-		else if(RFlag == 0){
-			RFlag = 1;
-			}
-		}
 	
-	function changeWord(){
-		if(CFlag == 1){
-			CFlag = 0;
-			}
-		else if(CFlag == 0){
-			CFlag = 1;
-			}
-		}
+function totalSearch(){
+    if (event.keyCode == 13 && $('#totalSearch').val() != '')
+    	totalsend();
+}
 
-	var count = 0;
-	
-	function TestStart(){
-		$('#StartTest').html('');
-		var str = '';
-		var strR = '';
-		if(RFlag == 0 && CFlag == 0){			//default 순서대로 단어가 문제
-			var Url = 'StartTest';
-		}
-		else if(RFlag == 1 && CFlag == 0){		//랜덤 순서대로 단어가 문제
-			var Url = 'Random';
-		}
-		else if(RFlag == 0 && CFlag == 1){		//순서대로 의미가 문제
-			var Url = 'MeanTest';
-		}
-		else if(RFlag == 1 && CFlag == 1){		//랜덤 순서대로 의미가 문제
-			var Url = 'RanMean';
-		}
-		$.ajax({
-			url:Url,
-			type:'post',
-			data:{
-				seq : ${seq}
-				},
-			success:function(result){
-					count = result.length;
-				
-					str+='<table class="table">';
-					str+='<thead class="table table-striped">';
-					str+='<tr>';
-					str+='<th scope="col">問題番号</th>';
-					str+='<th scope="col">問題</th>';
-					str+='<th scope="col">試験</th>';
-					str+='<th scope="col">正解確認</th>';
-					str+='<th scope="col"></th>';
-					str+='</tr>';
-					str+='</thead>';
-					str+='<tbody>';
+function totalsend()  {
+    var SearchList = $('#totalSearch').val();
+    $.ajax({
+		url:"totalSearch",
+		type:"post",
+		data:{searchList : SearchList},
+		success:function(result){
+			$('#contents-body').html('');
+
+			var str = '';
+			str += '<div class="card-deck" style="padding-bottom: 20px;">';
 			
-					for(var i = 0; count > i; i++){
-						str+='<tr>';
-						str+='<th scope="row">'+(i+1)+'</th>';
-						str+='<td>'+result[i].word+'</td>';
-						str+='<td><input type="text" placeholder="答入力" id="userAnswer'+i+'"></td>';
-						str+='<td class="openColor'+i+'" id="check'+i+'"></td>';
-						str+='<td><input type="hidden" id="Meaning'+i+'" value="'+result[i].meaning+'"></td>';
-						str+='</tr>';
-						str+='</tbody>';
+			for(var i = 0; i < result.length; i++){
+				str += '<div class="card">';
+				str += '<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">';
+				str += '<div class="card-body">';
+				str += '<h6 class="card-title">単語帳の名前 :'+ result[i].title +'</h6>';
+				str += '<p class="card-text">作成者 : '+ result[i].userid +'</p>';
+				
+				if(result[i].category_seq == 1){
+					str += '<p><a href="#" class="badge badge-danger">일본어</a></p>';
+					}
+				else if(result[i].category_seq == 2){
+					str += '<p><a href="#" class="badge badge-primary">영어</a></p>';
+				}
+				else if(result[i].category_seq == 3){
+					str += '<p><a href="#" class="badge badge-info">프랑스어</a></p>';
+				}
+				else if(result[i].category_seq == 4){
+					str += '<p><a href="#" class="badge badge-warning">중국어</a></p>';
+				}
+				else if(result[i].category_seq == 5){
+					str += '<p><a href="#" class="badge badge-dark">독일어</a></p>';
+				}
+				
+				str += '<a href="showdetail?seq='+ result[i].seq +'" class="btn btn-primary">詳しく</a>';
 
-						}
-					str+='</table>';
-				str += '<button type="button" class="btn btn-outline-primary" style="width: 50%; float:right;" onclick="openAnswer()">提出</button>';
-		
-				$('#StartTest').append(str);
+				str += '</div>';
+				str += '</div>';
 				}
-			});
-	}
-	function openAnswer(){
-		var UserAnswer = '';
-		var Meaning = '';
-		
-		for(var i = 0; count > i; i++){
-			if($('#userAnswer'+i).val() == $('#Meaning'+i).val()){
-				$('.openColor'+i).css('background', 'lightblue');
-				$('#check'+i).html('O');
-				}
-			else{
-				$('.openColor'+i).css('color', 'red');
-				$('#check'+i).html('X (正解 : '+$('#Meaning'+i).val()+')');
-				}
+			str += '</div>';
+			$('#contents-body').append(str);
 			}
-		
-	}
+        });
+}
 </script>
 
 
@@ -136,7 +99,7 @@ $(function(){
       <div class="content-header">
         <div class="content-search">
           <i data-feather="search"></i>
-          <input type="search" class="form-control" placeholder="Search...">
+          <input type="search" class="form-control" placeholder="単語帳検索..." id="totalSearch" onkeyup="totalSearch()">
         </div>
         <nav class="nav">
   
@@ -147,53 +110,35 @@ $(function(){
       </div>
       <!-- content-header -->
       <div class="content-body" id="contents-body">
-    <div >
-		<h1>単語帳の名前 : ${result.title}</h1>
-	</div>
-	<div id="exam">
-		<p>試験の例示及び方法の選択!</p>
-		<div id="selectTest" class="d-flex">
-			<div>
-				<div class="custom-control custom-switch">
-					<input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="changeOrder()">
-				 	 <label class="custom-control-label" for="customSwitch1">ランダム発売 </label>
-				 </div>
-			</div>
-			<div class="mg-sm-l-50">		 
-				 <div class="custom-control custom-switch">
-					 <input type="checkbox" class="custom-control-input" id="customSwitch2" onclick="changeWord()">
-					 <label class="custom-control-label" for="customSwitch2">問題と答転換</label>
-				 </div>
-			</div>
-		</div>
+	<div id="voca">
 		
+    <div >
+		<h1>単語帳の名前 : ${result[0].title}</h1>
+	</div>
+	
 			<div id="example" style="width: 50%; ">
 				<table class="table table-primary"	>
 				  <tbody>
 				   <thead>
 					    <tr>
-					      <th scope="col">문제</th>
-					      <th scope="col">답</th>
+					      <th scope="col">番号</th>
+					      <th scope="col">単語</th>
+					      <th scope="col">意味</th>
 					    </tr>
 					  </thead>
-				  	<tr>
-				  		<td>
-				  			${result.word }
-				  		</td>
-				  		<td>
-				  			${result.meaning }
-				  		</td>
-				  	</tr>
+				  	<c:forEach var="result" items="${result}" varStatus="status">
+					  	<tr>
+					  		<th scope="row">${status.count}</th>
+					  		<td>${result.word }</td>
+					  		<td>${result.meaning }</td>
+					  	</tr>
+					</c:forEach>
 				  </tbody>
 				</table>
+				
+				<a href="#" class="btn btn-outline-success" style="float:right;">学習しに行く</a>
+				
 			</div>
-	</div>
-	<a class="btn btn-outline-primary" data-toggle="collapse" href="#test" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="TestStart()">試験開始</a>
-	
-	<div class="collapse mg-t-5" id="test">
-		<div id="StartTest" style="width:50%; float:left; margin:5px; ">
-	  		
-		</div>
 	</div>
 	</div>
 

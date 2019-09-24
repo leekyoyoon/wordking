@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>Home!</title>
 	<!-- import CSS -->
 	<link rel="stylesheet" href="resources/css/dashforge.css" type="text/css">
 	<link href="resources/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -23,78 +22,168 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="resources/js/connect.js"></script>
 <script>
+$(function(){
+	$("#sidebarrr").load("resources/part/sidebar.jsp");
+	
+	$.ajax({
+		url:"myVoca",
+		type:"post",
+		data:{},
+		success:function(result){
+			var str = '';
+			var count = 0;
+
+			
+			for(var i = 0; i < result.length; i++){
+				if(count > 3){
+					str += '</div>';
+					count = 0;
+					}
+				if(count == 0){
+					str += '<div id="test" class="card-deck" style="padding-bottom: 20px;">';
+					}
+				str += '<div class="card">';
+				str += '<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">';
+				str += '<div class="card-body">';
+				str += '<h6 class="card-title">単語帳の名前 :'+ result[i].title +'</h6>';
+				str += '<p class="card-text">作成者 : '+ result[i].userid +'</p>';
+
+				str += '<p><a href="#" class="badge badge-danger"> '+ result[i].category_seq +'</a></p>';
+
+				str += '<a href="showdetail?seq='+ result[i].seq +'" class="btn btn-primary">詳しく</a>';
+				str += '</div>';
+				str += '</div>';
+				count ++;
+				}
+			str += '</div>';
+			$('#test').append(str);
+			
+		}
+	});
+})
+
+function totalSearch(){
+	    if (event.keyCode == 13 && $('#totalSearch').val() != ''){
+	    	totalsend();
+		    }
+	    else if(event.keyCode == 13 && $('#mySearchSearch').val() != ''){
+	    	mysend();
+		    }
+	}
+
+function mysend()  {
+	
+    var SearchList = $('#mySearch').val();
+	
+	$.ajax({
+		url:'MySearch',
+		type:"post",
+		data:{title : SearchList},
+		success:function(result){
+			$('#test').html('');
+
+			var str = '';
+			var count = 0;
+			
+			for(var i = 0; i < result.length; i++){
+				if(count > 3){
+					str += '</div>';
+					count = 0;
+					}
+				if(count == 0){
+					str += '<div id="test" class="card-deck" style="padding-bottom: 20px;">';
+					}
+				str += '<div class="card">';
+				str += '<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">';
+				str += '<div class="card-body">';
+				str += '<h6 class="card-title">単語帳の名前 :'+ result[i].title +'</h6>';
+				str += '<p class="card-text">作成者 : '+ result[i].userid +'</p>';
+
+				str += '<p><a href="#" class="badge badge-danger"> '+ result[i].category_seq +'</a></p>';
+
+				str += '<a href="showdetail?seq='+ result[i].seq +'" class="btn btn-primary">詳しく</a>';
+				str += '</div>';
+				str += '</div>';
+				}
+			str += '</div>';
+			$('#test').append(str);
+			}
+        });
+}
+
+function totalsend()  {
+	
+        var SearchList = $('#totalSearch').val();
+		
+		$.ajax({
+			url:'totalSearch',
+			type:"post",
+			data:{searchList : SearchList},
+			success:function(result){
+				$('#test').html('');
+
+				var str = '';
+				var count = 0;
+				
+				for(var i = 0; i < result.length; i++){
+					if(count > 3){
+						str += '</div>';
+						count = 0;
+						}
+					if(count == 0){
+						str += '<div id="test" class="card-deck" style="padding-bottom: 20px;">';
+						}
+					str += '<div class="card">';
+					str += '<img src="resources/img/1.png" width="100px" height="200px"  class="card-img-top" alt="...">';
+					str += '<div class="card-body">';
+					str += '<h6 class="card-title">単語帳の名前 :'+ result[i].title +'</h6>';
+					str += '<p class="card-text">作成者 : '+ result[i].userid +'</p>';
+
+					str += '<p><a href="#" class="badge badge-danger"> '+ result[i].category_seq +'</a></p>';
+
+					str += '<a href="showdetail?seq='+ result[i].seq +'" class="btn btn-primary">詳しく</a>';
+					str += '</div>';
+					
+					str += '</div>';
+					}
+				str += '</div>';
+				$('#test').append(str);
+				}
+            });
+}
 </script>
 <body>
-<div class="row" style="margin-bottom: 2.5%;">
-  <div class="col-sm-4">
-  <div class="search-form" style="width: 75%;">
-  <input type="search" class="form-control" placeholder="Search">
-  <button class="btn" type="button" style="background-color: white;">検索</button>
-</div>
-  </div>
-  <div class="col-sm-4 offset-sm-4" style="text-align:right; float: right;">
-  <button type="button" class="btn btn-outline-secondary" onclick="location.href='goInsertWord'">作成</button></div>
-</div>
+<aside class="aside aside-fixed" id="sidebarrr" style="position: fixed;">
+</aside>
+ <div class="content ht-100v pd-0">
 
-  <table class="table table-light">
-  <thead>
-    <tr>
-      <th scope="col">Image</th>
-      <th scope="col">Category</th>
-      <th scope="col">Title</th>
-      <th scope="col">Contents</th>
-      <th scope="col">Word개수</th>
-      <th scope="col">updateDate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="hoverr">
-      <th scope="row">1</th>
-      <td>Adrian Monino</td>
-      <td>Front-End Engineer</td>
-      <td>Computer Science</td>
-      <td>$120,000</td>
-      <td>2019/12/12</td>
-    </tr>
-    <tr class="hoverr">
-      <th scope="row">2</th>
-      <td>Socrates Itumay</td>
-      <td>Software Engineer</td>
-      <td>Computer Engineering</td>
-      <td>$150,000</td>
-      <td>2019/12/12</td>
-    </tr>
-    <tr class="hoverr">
-      <th scope="row">3</th>
-      <td>Reynante Labares</td>
-      <td>Product Manager</td>
-      <td>Business Management</td>
-      <td>$250,000</td>
-      <td>2019/12/12</td>
-    </tr>
-  </tbody>
-</table>
 
-<div style="text-align: right;width: 100%;float: right;">
-<nav aria-label="Page navigation example" style="text-align: right;float: right;">
-  <ul class="pagination mg-b-0">
-    <li class="page-item disabled"><a class="page-link page-link-icon" href="#"><i data-feather="chevron-left"></i></a></li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link page-link-icon" href="#"><i data-feather="chevron-right"></i></a></li>
-  </ul>
-</nav>
+      <div class="content-header">
+        <div class="content-search">
+          <i data-feather="search"></i>
+          <input type="search" class="form-control" placeholder="単語帳検索..." id="totalSearch" onkeyup="totalSearch()">
+        </div>
+        <nav class="nav">
+  
+          <a href="" class="nav-link"><i data-feather="help-circle" style="width: 2em;height:2em;"></i></a>
+          <a href="" class="nav-link"><i data-feather="grid" style="width: 2em;height:2em;"></i></a>
+          <a href="goMypage" class="nav-link"><i data-feather="user" style="width: 2em;height:2em;"></i></a>
+        </nav>
+      </div>
+      <!-- content-header -->
+      <div class="content-body" id="contents-body">
+		
+      	<div id="test" style="padding-bottom: 20px;">
+
+		</div>
+      
+      	<div class="search-form" style="width: 30%; margin: auto;">
+			<input type="search" class="form-control" placeholder="私の単語帳で検索......" id="mySearch" onkeyup="totalSearch()">
+			<i data-feather="search"></i>
+		</div>
+	</div>
 </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="resources/lib/feather-icons/feather.min.js"></script>
-    <script src="resources/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
- 	<script src="resources/lib/jquery/jquery.min.js"></script>
-    <script src="resources/js/dashforge.js"></script>
-   
-    <!-- append theme customizer -->
-    <script src="resources/lib/js-cookie/js.cookie.js"></script>
+      
     
 </body>
 <style>
