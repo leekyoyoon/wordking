@@ -18,7 +18,6 @@ public class ExcelDownloadView extends AbstractView{
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
         Locale locale = (Locale) model.get("locale");
         String workbookName = (String) model.get("workbookName");
         

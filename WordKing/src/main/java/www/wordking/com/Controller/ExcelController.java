@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import www.wordking.com.DAO.ExcelService;
+import www.wordking.com.DAO.WordDAO;
 import www.wordking.com.VO.Excel;
 
 
@@ -22,19 +23,20 @@ import www.wordking.com.VO.Excel;
 public class ExcelController {
 	@Autowired
 	ExcelService service;
+	@Autowired
+	WordDAO wdao;
 
 	@RequestMapping(value = "/downloadExcelFile", method = RequestMethod.POST)
-	public String downloadExcelFile(Model model) {
-		String[] names = {"ÀÚ¸ù", "¾ÖÇÃ¸Á°í", "¸á·Ð", "¿À·»Áö"};
-		long[] prices = {5000, 10000, 7000, 6000};
-		int[] quantities = {50, 50, 40, 40};
-		List<Excel> list = service.makeFruitList(names, prices, quantities);
-
-		SXSSFWorkbook workbook = service.excelFileDownloadProcess(list);
-
-		model.addAttribute("locale", Locale.KOREA);
-		model.addAttribute("workbook", workbook);
-		model.addAttribute("workbookName", "°úÀÏÇ¥");
+	public String downloadExcelFile(String[] Word, String[] Meaning, String title, Model model) {
+		
+		List<Excel> list = service.makeFruitList(Word, Meaning);
+		  
+		SXSSFWorkbook workbook = service.excelFileDownloadProcess(list, title);
+		  
+		model.addAttribute("locale", Locale.KOREA); 
+		model.addAttribute("workbook", workbook); 
+		model.addAttribute("workbookName", title);
+		 
 
 		return "excelDownloadView";
 	}

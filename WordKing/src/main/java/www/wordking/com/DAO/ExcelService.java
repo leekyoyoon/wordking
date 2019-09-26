@@ -46,15 +46,11 @@ public class ExcelService {
 
 				// 행의 두번째 열(이름부터 받아오기) 
 				XSSFCell cell = row.getCell(1);
-				if(null != cell) fruit.setName(cell.getStringCellValue());
+				if(null != cell) fruit.setWord(cell.getStringCellValue());
 				// 행의 세번째 열 받아오기
 				cell = row.getCell(2);
-				if(null != cell) fruit.setPrice((long)cell.getNumericCellValue());
-				// 행의 네번째 열 받아오기
-				cell = row.getCell(3);
-				if(null != cell) fruit.setQuantity((int)cell.getNumericCellValue());
-				
-				
+				if(null != cell) fruit.setMeaning(cell.getStringCellValue());
+
 				list.add(fruit);
 				
 			}
@@ -72,10 +68,10 @@ public class ExcelService {
 	 * @param quantities
 	 * @return 엑셀파일 리스트
 	 */
-	public ArrayList<Excel> makeFruitList(String[] names, long[] prices, int[] quantities){
+	public ArrayList<Excel> makeFruitList(String[] Word, String[] Meaning){
 		ArrayList<Excel> list = new ArrayList<Excel>();
-		for(int i=0; i< names.length; i++) {
-			Excel fruit = new Excel(names[i], prices[i], quantities[i]);
+		for(int i=0; i< Word.length; i++) {
+			Excel fruit = new Excel(Word[i], Meaning[i]);
 			list.add(fruit);
 		}
 		return list;
@@ -86,11 +82,11 @@ public class ExcelService {
 	 * @param list
 	 * @return 생성된 워크북
 	 */
-	public SXSSFWorkbook makeSimpleFruitExcelWorkbook(List<Excel> list) {
+	public SXSSFWorkbook makeSimpleFruitExcelWorkbook(List<Excel> list, String title) {
 		SXSSFWorkbook workbook = new SXSSFWorkbook();
 
 		// 시트 생성
-		SXSSFSheet sheet = workbook.createSheet("과일표");
+		SXSSFSheet sheet = workbook.createSheet(title);
 
 		//시트 열 너비 설정
 		sheet.setColumnWidth(0, 1500);
@@ -105,13 +101,10 @@ public class ExcelService {
 		headerCell.setCellValue("번호");
 		// 해당 행의 두번째 열 셀 생성
 		headerCell = headerRow.createCell(1);
-		headerCell.setCellValue("과일이름");
+		headerCell.setCellValue("단어");
 		// 해당 행의 세번째 열 셀 생성
 		headerCell = headerRow.createCell(2);
-		headerCell.setCellValue("가격");
-		// 해당 행의 네번째 열 셀 생성
-		headerCell = headerRow.createCell(3);
-		headerCell.setCellValue("수량");
+		headerCell.setCellValue("의미");
 
 		// 과일표 내용 행 및 셀 생성
 		Row bodyRow = null;
@@ -124,15 +117,12 @@ public class ExcelService {
 			// 데이터 번호 표시
 			bodyCell = bodyRow.createCell(0);
 			bodyCell.setCellValue(i + 1);
-			// 데이터 이름 표시
+			// 단어 표시
 			bodyCell = bodyRow.createCell(1);
-			bodyCell.setCellValue(fruit.getName());
-			// 데이터 가격 표시
+			bodyCell.setCellValue(fruit.getWord());
+			// 의미 표시
 			bodyCell = bodyRow.createCell(2);
-			bodyCell.setCellValue(fruit.getPrice());
-			// 데이터 수량 표시
-			bodyCell = bodyRow.createCell(3);
-			bodyCell.setCellValue(fruit.getQuantity());
+			bodyCell.setCellValue(fruit.getMeaning());
 		}
 
 		return workbook;
@@ -143,8 +133,8 @@ public class ExcelService {
 	 * @param list
 	 * @return
 	 */
-	public SXSSFWorkbook excelFileDownloadProcess(List<Excel> list) {
-		return this.makeSimpleFruitExcelWorkbook(list);
+	public SXSSFWorkbook excelFileDownloadProcess(List<Excel> list, String title) {
+		return this.makeSimpleFruitExcelWorkbook(list, title);
 	}
 
 }

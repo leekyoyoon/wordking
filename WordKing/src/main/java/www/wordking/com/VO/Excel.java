@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Excel {
-	String name;
-    long price;
-    int quantity;
+	String Word;
+    String Meaning;
 }
