@@ -131,4 +131,19 @@ public class VocaController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/downDetail",method=RequestMethod.GET)
+	@ResponseBody public ArrayList<Word> downDetail(int seq,HttpSession session, Model model) {
+		String userid = (String)session.getAttribute("loginId");
+		
+		ArrayList<Word> result = new ArrayList<Word>();
+		if(userid != null) {
+			
+			result = wdao.showdetail(seq);
+
+			return result;
+		}else{
+			return result;
+		}
+	}
 }
